@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="XlightsSequenceAdapter.exe" version="1.0.0.0" publicKeyToken="ec9311a87e0b3758" language="neutral" processorArchitecture="msil" type="win32" />
+  <description asmv2:iconFile="Christmas-Lights.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="XlightsSequenceAdapter" version="1.1.0.0" language="neutral" processorArchitecture="msil" />
+    <commandLine file="XlightsSequenceAdapter.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!--
+          UAC Manifest Options
+          If you want to change the Windows User Account Control level replace the
+          requestedExecutionLevel node with one of the following.
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+         If you want to utilize File and Registry Virtualization for backward
+         compatibility then delete the requestedExecutionLevel node.
+    -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="XlightsSequenceAdapter.exe" size="15939536">
+      <assemblyIdentity name="XlightsSequenceAdapter" version="1.1.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>BRw6w0E8zD9u4/MSoxAMZTJbJ/29k+sOxlNOEwdtp40=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="Christmas-Lights.ico" size="177711">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>Z0J9Xc67HqaFgZu0bTIgS7i90FlwmAn1mIaivG/8cIA=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="XlightsSequenceAdapter.exe.config" size="701">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>K6coxUsdoSMgFRyfDrHFkeIi6vf5m/Q9x8D2+UXlXOs=</dsig:DigestValue>
+    </hash>
+  </file>
+<publisherIdentity name="CN=MEDIACENTER\Adonis" issuerKeyHash="40680a3a592762e17fcad04701f2dfeacc64ef87" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>e4ejzbDQRzd3INIUuS3ByKbEKa9oz72FuQcigAzjD10=</DigestValue></Reference></SignedInfo><SignatureValue>jZPPMLIOQVo0CLTvKxD2vxlT1R+kisEEu+AXK+bGQE8oHSF0a5r4EdNZqnGXVU4OykGfHYaN7pWCGXNUcpgonENXorIu95RthFYAJU9bOxLgG7XW02SngAUu1+rsjMtSZ/PAmc0X/i60U/49QvzNvDGsMAsULINumF2oesSDY0Y=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>rMkC7dcoqWz6tLHqplg0Z/OLXCBa8uzdrgEuTgUwXLe3BTwtzpMdZnIMJ+dC0fL7FGmbETi/bCHXIIXCcJqDbGYGkxOvobdxC2txcewhietxob9XJodUmMZpQVvah2HVQ2gC3FmIdWNXGUgRQK0PAGD16i7xMtoVwI8oT/QrSIU=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="5d0fe30c802207b985bdcf68af29c4a6c8c12db914d220773747d0b0cda3877b" Description="" Url=""><as:assemblyIdentity name="XlightsSequenceAdapter.exe" version="1.0.0.0" publicKeyToken="ec9311a87e0b3758" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=MEDIACENTER\Adonis</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>DD/cXtsuLxYhKLnKW8DwqjaVTXksUoKJVpkNjm28SAk=</DigestValue></Reference></SignedInfo><SignatureValue>PTMss99lKGgLjYOFz58+/Spl2fxb966LhkfMQbgnWYYS3zu3OVjjKdP3WqdK/OqAevyD+hbgzI33A9WlHA77OdE9eIMlqUW1l74+xxbrgyTUafZn2v/UpEuXnFVInAPZSHwd89byRXLAuPs1uOV2EXdydt632UrAMvhwCpsgh8w=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>rMkC7dcoqWz6tLHqplg0Z/OLXCBa8uzdrgEuTgUwXLe3BTwtzpMdZnIMJ+dC0fL7FGmbETi/bCHXIIXCcJqDbGYGkxOvobdxC2txcewhietxob9XJodUmMZpQVvah2HVQ2gC3FmIdWNXGUgRQK0PAGD16i7xMtoVwI8oT/QrSIU=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIB4TCCAUqgAwIBAgIQcajtw9vwJLxBaK60lDV+qjANBgkqhkiG9w0BAQsFADAvMS0wKwYDVQQDHiQATQBFAEQASQBBAEMARQBOAFQARQBSAFwAQQBkAG8AbgBpAHMwHhcNMjAxMjEzMDE0NjA1WhcNMjExMjEzMDc0NjA1WjAvMS0wKwYDVQQDHiQATQBFAEQASQBBAEMARQBOAFQARQBSAFwAQQBkAG8AbgBpAHMwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAKzJAu3XKKls+rSx6qZYNGfzi1wgWvLs3a4BLk4FMFy3twU8Lc6THWZyDCfnQtHy+xRpmxE4v2wh1yCFwnCag2xmBpMTr6G3cQtrcXHsIYnrcaG/VyaHVJjGaUFb2odh1UNoAtxZiHVjVxlIEUCtDwBg9eou8TLaFcCPKE/0K0iFAgMBAAEwDQYJKoZIhvcNAQELBQADgYEAcdVa9UJgNlLfmEoL5c/9OvPKl7C33tEkNAQQXAELNXWgrQuUj+7M8rizbNa2vynddhL1PI4eQMnUHUNzwbVBG7y4xb3pyyxk3i05XecrYx0L0Qn6+ASAZ1+Bp1eknCpyq+7xivD7gRFv0djHhmtgH0wtDdO4tagpkOhJcBFN3Ec=</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>

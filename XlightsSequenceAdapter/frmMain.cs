@@ -17,7 +17,8 @@ namespace XlightsSequenceAdapter
         List<String> layoutModels = new List<String>();
         string ShowFileToAdapt;
         string ShowPath;
-        string layoutPath;
+        string layoutPath, sharedPath;
+        XElement myPerspectives;
         const string layoutFile = "xlights_rgbeffects.xml";
         const string noselection = "- None Selected -";
 
@@ -26,12 +27,13 @@ namespace XlightsSequenceAdapter
             InitializeComponent();
 
             cmdOpenShow.Enabled = false;
-            cmdExport.Enabled = false;
+            cmdExportShowSAF.Enabled = false;
             lblRefShow.Text = noselection;
             lblShowName.Text = noselection;
 
 #if DEBUG
-            layoutPath = "D:\\Documents\\XLights Show\\2021";
+            layoutPath = "E:\\xLightsShow\\2021.Christmas";
+            sharedPath = "E:\\xLightsShow\\Shared Shows";
             diagFolderBrowser.SelectedPath = layoutPath;
             diagSaveFile.InitialDirectory = layoutPath;
             loadXRGB(Path.Combine(layoutPath, layoutFile));
@@ -49,7 +51,7 @@ namespace XlightsSequenceAdapter
             }
 
             cmdOpenShow.Enabled = false;
-            cmdExport.Enabled = false;
+            cmdExportShowSAF.Enabled = false;
             lblRefShow.Text = noselection;
 
             layoutPath = diagFolderBrowser.SelectedPath;
@@ -84,6 +86,8 @@ namespace XlightsSequenceAdapter
                 layoutModels.Add(xEle.Attribute("name").Value);
             }
 
+            myPerspectives = xelement.Descendants("perspectives").FirstOrDefault();
+
             // TODO: Add something like - use constant so  you can compare easily.  This allows us to unmap a mapping.  layoutModels.Add("- None -");
 
             layoutModels.Sort();
@@ -98,7 +102,7 @@ namespace XlightsSequenceAdapter
 
         private void cmdOpenShow_Click(object sender, EventArgs e)
         {
-            cmdExport.Enabled = false;
+            cmdExportShowSAF.Enabled = false;
 
             diagOpenFile.Filter = "Sequence files (*.xml, *.xsq) | *.xml; *.xsq|All files (*.*) | *.*";
             DialogResult res = diagOpenFile.ShowDialog();
@@ -245,16 +249,16 @@ namespace XlightsSequenceAdapter
             foreach (XElement asset in assets)
             {
                 filename = getAssetFullFilePathFromEffect(asset.Value);
-                
+
                 // Only add the file to the list if it's not already there.
                 if (!nodeExists(filename, listShowAssets.Nodes))
                 {
-                    imgindex = File.Exists(filename.Replace("/","\\")) ? 1 : 0;
+                    imgindex = File.Exists(filename.Replace("/", "\\")) ? 1 : 0;
                     listShowAssets.Nodes.Add(new TreeNode(filename, imgindex, imgindex));
                 }
             }
 
-            cmdExport.Enabled = true;
+            cmdExportShowSAF.Enabled = true;
         }
 
         private string getAssetFullFilePathFromEffect(string effectDefinition)
@@ -286,7 +290,7 @@ namespace XlightsSequenceAdapter
             DataGridViewComboBoxCell cell;
             foreach (DataGridViewRow row in dgvModels.Rows)
             {
-                cell = (DataGridViewComboBoxCell) row.Cells[colMapTo.Index];
+                cell = (DataGridViewComboBoxCell)row.Cells[colMapTo.Index];
                 if (cell.Value != null)
                 {
                     noMapping = false;
@@ -352,10 +356,10 @@ namespace XlightsSequenceAdapter
                            select model;
             demodels.Remove();
 
-            foreach(string model in layoutModels)
+            foreach (string model in layoutModels)
             {
                 doc.Element("DisplayElements").Add(
-                    new XElement("Element", 
+                    new XElement("Element",
                         new XAttribute("collapsed", "0"),
                         new XAttribute("type", "model"),
                         new XAttribute("name", model),
@@ -390,10 +394,10 @@ namespace XlightsSequenceAdapter
                 {
                     // look for all EffectDB entries containing one of the asset types (Video or Pictures) and my filename
                     var effects = from show in doc.Elements("EffectDB").Elements("Effect")
-                                 where ((show.Value.Contains("E_FILEPICKERCTRL_Video_Filename") ||
-                                       show.Value.Contains("E_FILEPICKER_Pictures_Filename")) && 
-                                       (show.Value.Contains(Path.GetFileName(asset.Text))))
-                                 select show;
+                                  where ((show.Value.Contains("E_FILEPICKERCTRL_Video_Filename") ||
+                                        show.Value.Contains("E_FILEPICKER_Pictures_Filename")) &&
+                                        (show.Value.Contains(Path.GetFileName(asset.Text))))
+                                  select show;
 
                     // update all references to matching files with new show directory location
                     foreach (XElement effect in effects)
@@ -433,7 +437,7 @@ namespace XlightsSequenceAdapter
 
             MessageBox.Show("Show adapted with your mappings.",
                     "Done!", MessageBoxButtons.OK);
-            
+
             Process.Start("explorer.exe", layoutPath);
         }
 
@@ -472,6 +476,161 @@ namespace XlightsSequenceAdapter
         private void rtfHelp_LinkClicked(object sender, LinkClickedEventArgs e)
         {
             Process.Start(e.LinkText);
+        }
+
+        private void lnklblWorkingPath_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            cmdMoveFiles.Enabled = false;
+            cmdPersonalize.Enabled = false;
+            diagFolderBrowser.SelectedPath = txtPizPath.Text;
+            diagFolderBrowser.ShowDialog();
+            txtPizPath.Text = diagFolderBrowser.SelectedPath;
+        }
+
+        private void cmdPizAnalyze_Click(object sender, EventArgs e)
+        {
+            dgvPizMgmt.Rows.Clear();
+            cmdMoveFiles.Enabled = true;
+            pizLook(false);
+        }
+
+        private void cmdMoveFiles_Click(object sender, EventArgs e)
+        {
+            dgvPizMgmt.Rows.Clear();
+            cmdMoveFiles.Enabled = false;
+            pizLook(true);
+        }
+
+        private void pizLook(bool andMove)
+        {
+            // Look at path in txtPizPath and find files matching folder names and map them up
+            // Would be nice to show archives that are not extracted
+            // Would also be nice to show folders missing their archive copy
+            List<string> dirs = Directory.EnumerateDirectories(txtPizPath.Text).ToList();
+            List<string> files = Directory.EnumerateFiles(txtPizPath.Text).ToList();
+
+            colFullPath.Visible = false;
+            colFile.Visible = true;
+            colFolder.Visible = true;
+
+            string canDir, canFile;
+            foreach (string file in files)
+            {
+                canFile = Path.Combine(Path.GetDirectoryName(file), Path.GetFileNameWithoutExtension(file).Trim());
+                canDir = dirs.Find(s => s == canFile);
+                if (canDir != null)
+                {
+                    if (andMove)
+                    {
+                        File.Move(file, Path.Combine(canDir, Path.GetFileName(file)));
+                        dgvPizMgmt.Rows.Add(new string[] { canDir, "Consolidated" });
+                    }
+                    else
+                    {
+                        dgvPizMgmt.Rows.Add(new string[] { canDir, file });
+                    }
+                }
+
+            }
+        }
+
+        private void cmdGetList_Click(object sender, EventArgs e)
+        {
+            var curcursor = Cursor.Current;
+            Cursor.Current = Cursors.WaitCursor;
+
+            cmdPersonalize.Enabled = true;
+            colFullPath.Visible = true;
+            colFile.Visible = true;
+            colFolder.Visible = true;
+
+            dgvPizMgmt.Rows.Clear();
+
+            var ext = new List<string> { "xml", "xsq" };
+            var myFiles = Directory
+                .EnumerateFiles(txtPizPath.Text, "*.*", SearchOption.AllDirectories)
+                .Where(s => ext.Contains(Path.GetExtension(s).TrimStart('.').ToLowerInvariant()));
+
+            string canFile;
+            foreach (string file in myFiles)
+            {
+                // Ignore:
+                //      xlights_keybindings.xml
+                //      xlights_networks.xml
+                //      xlights_rgbeffects.xml
+                //      containing \Backup\ in path
+
+                canFile = Path.GetFileName(file);
+
+                if ((canFile == "xlights_keybindings.xml") || (canFile == "xlights_rgbeffects.xml") || (canFile == "xlights_networks.xml"))
+                {
+                    // ignore it
+                }
+                else if ((file.Contains("\\Backup\\")) || (file.Contains("\\__MACOSX\\")))
+                {
+                    // ignore it
+                }
+                else
+                    dgvPizMgmt.Rows.Add(new string[] { Path.GetDirectoryName(file), canFile, file });
+            }
+
+            Cursor.Current = curcursor;
+        }
+
+        private void cmdPersonalize_Click(object sender, EventArgs e)
+        {
+            var curcursor = Cursor.Current;
+            Cursor.Current = Cursors.WaitCursor;
+
+            // This function would take the copy the xlights_rgbeffects.xml to xlights_rgbeffects.bak and replace the perspectives element with our own and then save the xml file.
+            // It would also be good to replace the xlights_keybindings.xml file.
+
+            cmdPersonalize.Enabled = true;
+            colFullPath.Visible = true;
+            colFile.Visible = true;
+            colFolder.Visible = true;
+
+            dgvPizMgmt.Rows.Clear();
+
+            var ext = new List<string> { "xml" };
+            var myFiles = Directory
+                .EnumerateFiles(txtPizPath.Text, "*.*", SearchOption.AllDirectories)
+                .Where(s => ext.Contains(Path.GetExtension(s).TrimStart('.').ToLowerInvariant()));
+
+            string canFile;
+            foreach (string file in myFiles)
+            {
+                canFile = Path.GetFileName(file);
+                if ((file.Contains("\\Backup\\")) || (file.Contains("\\__MACOSX\\")))
+                {
+                    // ignore it
+                }
+                else if (canFile == "xlights_rgbeffects.xml")
+                {
+                    try
+                    {
+                        // If there's a keybindings file, back it up and replace it with ours.
+                        if (File.Exists(Path.Combine(Path.GetDirectoryName(file), "xlights_keybindings.xml")))
+                            File.Move(Path.Combine(Path.GetDirectoryName(file), "xlights_keybindings.xml"), Path.Combine(Path.GetDirectoryName(file), "xlights_keybindings" + DateTime.Now.ToString(".yyyyMMddHHmmssf") + ".bak"));
+                        File.Copy(Path.Combine(layoutPath, "xlights_keybindings.xml"), Path.Combine(Path.GetDirectoryName(file), "xlights_keybindings.xml"));
+
+                        // make a backup of the rgbeffects file before modifying
+                        File.Copy(file, Path.Combine(Path.GetDirectoryName(file), Path.GetFileNameWithoutExtension(file) + DateTime.Now.ToString(".yyyyMMddHHmmssf") + ".bak"));
+
+                        // open and replace perspectives element with ours.
+                        XElement doc = XElement.Load(file);
+                        doc.Descendants("perspectives").Remove();
+                        doc.Add(myPerspectives);
+                        doc.Save(file);
+
+                        dgvPizMgmt.Rows.Add(new string[] { Path.GetDirectoryName(file), "Personalization complete.", "" });
+                    } catch (Exception ex) {
+                        dgvPizMgmt.Rows.Add(new string[] { Path.GetDirectoryName(file), "Error: " + ex.Message, "Try opening this sequence in xlights, saving and closing and then personalize again."});
+                    }
+                }
+            }
+
+            Cursor.Current = curcursor;
         }
     }
 }

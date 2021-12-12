@@ -45,33 +45,35 @@ namespace XlightsSequenceAdapter
             this.tabHelp = new System.Windows.Forms.TabPage();
             this.rtfHelp = new System.Windows.Forms.RichTextBox();
             this.tabPiz = new System.Windows.Forms.TabPage();
-            this.label3 = new System.Windows.Forms.Label();
-            this.dgvPizMgmt = new System.Windows.Forms.DataGridView();
-            this.colFile = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFolder = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cmdPizAnalyze = new System.Windows.Forms.Button();
-            this.txtPizPath = new System.Windows.Forms.TextBox();
-            this.lnklblWorkingPath = new System.Windows.Forms.LinkLabel();
-            this.tabAssets = new System.Windows.Forms.TabPage();
-            this.label4 = new System.Windows.Forms.Label();
-            this.chkRemapAssets = new System.Windows.Forms.CheckBox();
-            this.chkCopyAssets = new System.Windows.Forms.CheckBox();
-            this.listShowAssets = new System.Windows.Forms.TreeView();
-            this.cmdExportShowSAF = new System.Windows.Forms.Button();
-            this.cmdFindAssetFiles = new System.Windows.Forms.Button();
-            this.tabLayout = new System.Windows.Forms.TabPage();
-            this.dgvModels = new System.Windows.Forms.DataGridView();
-            this.colMapTo = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.colModelFX = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.colModelFXDuration = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colModelFXCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colModelFXLayers = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colShowModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cmdExportShowLM = new System.Windows.Forms.Button();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.cmdGetList = new System.Windows.Forms.Button();
-            this.colFullPath = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cmdPersonalize = new System.Windows.Forms.Button();
+            this.cmdGetList = new System.Windows.Forms.Button();
+            this.lnklblWorkingPath = new System.Windows.Forms.LinkLabel();
+            this.txtPizPath = new System.Windows.Forms.TextBox();
+            this.cmdPizAnalyze = new System.Windows.Forms.Button();
+            this.dgvPizMgmt = new System.Windows.Forms.DataGridView();
+            this.colFolder = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFile = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFullPath = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label3 = new System.Windows.Forms.Label();
+            this.tabAssets = new System.Windows.Forms.TabPage();
+            this.cmdFindAssetFiles = new System.Windows.Forms.Button();
+            this.cmdExportShowSAF = new System.Windows.Forms.Button();
+            this.listShowAssets = new System.Windows.Forms.TreeView();
+            this.chkCopyAssets = new System.Windows.Forms.CheckBox();
+            this.chkRemapAssets = new System.Windows.Forms.CheckBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.tabLayout = new System.Windows.Forms.TabPage();
+            this.cmdExportShowLM = new System.Windows.Forms.Button();
+            this.dgvModels = new System.Windows.Forms.DataGridView();
+            this.colShowModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colModelFXLayers = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colModelFXCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colModelFXDuration = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colModelFX = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.colMapTo = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.chkHideNoEffects = new System.Windows.Forms.CheckBox();
+            this.chkShowMapToSubs = new System.Windows.Forms.CheckBox();
             this.tabHelp.SuspendLayout();
             this.tabPiz.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPizMgmt)).BeginInit();
@@ -193,19 +195,63 @@ namespace XlightsSequenceAdapter
             this.tabPiz.Controls.Add(this.label3);
             this.tabPiz.Location = new System.Drawing.Point(4, 22);
             this.tabPiz.Name = "tabPiz";
-            this.tabPiz.Size = new System.Drawing.Size(758, 238);
+            this.tabPiz.Size = new System.Drawing.Size(877, 560);
             this.tabPiz.TabIndex = 3;
             this.tabPiz.Text = "PIZ Management";
             this.tabPiz.UseVisualStyleBackColor = true;
             // 
-            // label3
+            // cmdPersonalize
             // 
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(3, 3);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(728, 99);
-            this.label3.TabIndex = 9;
-            this.label3.Text = resources.GetString("label3.Text");
+            this.cmdPersonalize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdPersonalize.Enabled = false;
+            this.cmdPersonalize.Location = new System.Drawing.Point(795, 103);
+            this.cmdPersonalize.Name = "cmdPersonalize";
+            this.cmdPersonalize.Size = new System.Drawing.Size(75, 23);
+            this.cmdPersonalize.TabIndex = 16;
+            this.cmdPersonalize.Text = "Personalize";
+            this.cmdPersonalize.UseVisualStyleBackColor = true;
+            this.cmdPersonalize.Click += new System.EventHandler(this.cmdPersonalize_Click);
+            // 
+            // cmdGetList
+            // 
+            this.cmdGetList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdGetList.Location = new System.Drawing.Point(692, 103);
+            this.cmdGetList.Name = "cmdGetList";
+            this.cmdGetList.Size = new System.Drawing.Size(97, 23);
+            this.cmdGetList.TabIndex = 15;
+            this.cmdGetList.Text = "Get Show List";
+            this.cmdGetList.UseVisualStyleBackColor = true;
+            this.cmdGetList.Click += new System.EventHandler(this.cmdGetList_Click);
+            // 
+            // lnklblWorkingPath
+            // 
+            this.lnklblWorkingPath.AutoSize = true;
+            this.lnklblWorkingPath.Location = new System.Drawing.Point(5, 108);
+            this.lnklblWorkingPath.Name = "lnklblWorkingPath";
+            this.lnklblWorkingPath.Size = new System.Drawing.Size(72, 13);
+            this.lnklblWorkingPath.TabIndex = 12;
+            this.lnklblWorkingPath.TabStop = true;
+            this.lnklblWorkingPath.Text = "Working Path";
+            this.lnklblWorkingPath.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnklblWorkingPath_LinkClicked);
+            // 
+            // txtPizPath
+            // 
+            this.txtPizPath.Location = new System.Drawing.Point(83, 105);
+            this.txtPizPath.Name = "txtPizPath";
+            this.txtPizPath.Size = new System.Drawing.Size(307, 20);
+            this.txtPizPath.TabIndex = 11;
+            this.txtPizPath.Text = "E:\\xLightsShow\\Shared Shows";
+            // 
+            // cmdPizAnalyze
+            // 
+            this.cmdPizAnalyze.Location = new System.Drawing.Point(396, 103);
+            this.cmdPizAnalyze.Name = "cmdPizAnalyze";
+            this.cmdPizAnalyze.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.cmdPizAnalyze.Size = new System.Drawing.Size(75, 23);
+            this.cmdPizAnalyze.TabIndex = 13;
+            this.cmdPizAnalyze.Text = "Analyze";
+            this.cmdPizAnalyze.UseVisualStyleBackColor = true;
+            this.cmdPizAnalyze.Click += new System.EventHandler(this.cmdPizAnalyze_Click);
             // 
             // dgvPizMgmt
             // 
@@ -224,15 +270,8 @@ namespace XlightsSequenceAdapter
             this.dgvPizMgmt.Name = "dgvPizMgmt";
             this.dgvPizMgmt.ReadOnly = true;
             this.dgvPizMgmt.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            this.dgvPizMgmt.Size = new System.Drawing.Size(749, 106);
+            this.dgvPizMgmt.Size = new System.Drawing.Size(868, 428);
             this.dgvPizMgmt.TabIndex = 10;
-            // 
-            // colFile
-            // 
-            this.colFile.HeaderText = "File";
-            this.colFile.Name = "colFile";
-            this.colFile.ReadOnly = true;
-            this.colFile.Width = 48;
             // 
             // colFolder
             // 
@@ -241,35 +280,28 @@ namespace XlightsSequenceAdapter
             this.colFolder.ReadOnly = true;
             this.colFolder.Width = 61;
             // 
-            // cmdPizAnalyze
+            // colFile
             // 
-            this.cmdPizAnalyze.Location = new System.Drawing.Point(396, 103);
-            this.cmdPizAnalyze.Name = "cmdPizAnalyze";
-            this.cmdPizAnalyze.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.cmdPizAnalyze.Size = new System.Drawing.Size(75, 23);
-            this.cmdPizAnalyze.TabIndex = 13;
-            this.cmdPizAnalyze.Text = "Analyze";
-            this.cmdPizAnalyze.UseVisualStyleBackColor = true;
-            this.cmdPizAnalyze.Click += new System.EventHandler(this.cmdPizAnalyze_Click);
+            this.colFile.HeaderText = "File";
+            this.colFile.Name = "colFile";
+            this.colFile.ReadOnly = true;
+            this.colFile.Width = 48;
             // 
-            // txtPizPath
+            // colFullPath
             // 
-            this.txtPizPath.Location = new System.Drawing.Point(83, 105);
-            this.txtPizPath.Name = "txtPizPath";
-            this.txtPizPath.Size = new System.Drawing.Size(307, 20);
-            this.txtPizPath.TabIndex = 11;
-            this.txtPizPath.Text = "E:\\xLightsShow\\Shared Shows";
+            this.colFullPath.HeaderText = "Full Path";
+            this.colFullPath.Name = "colFullPath";
+            this.colFullPath.ReadOnly = true;
+            this.colFullPath.Width = 73;
             // 
-            // lnklblWorkingPath
+            // label3
             // 
-            this.lnklblWorkingPath.AutoSize = true;
-            this.lnklblWorkingPath.Location = new System.Drawing.Point(5, 108);
-            this.lnklblWorkingPath.Name = "lnklblWorkingPath";
-            this.lnklblWorkingPath.Size = new System.Drawing.Size(72, 13);
-            this.lnklblWorkingPath.TabIndex = 12;
-            this.lnklblWorkingPath.TabStop = true;
-            this.lnklblWorkingPath.Text = "Working Path";
-            this.lnklblWorkingPath.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnklblWorkingPath_LinkClicked);
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(3, 3);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(728, 99);
+            this.label3.TabIndex = 9;
+            this.label3.Text = resources.GetString("label3.Text");
             // 
             // tabAssets
             // 
@@ -282,45 +314,32 @@ namespace XlightsSequenceAdapter
             this.tabAssets.Location = new System.Drawing.Point(4, 22);
             this.tabAssets.Name = "tabAssets";
             this.tabAssets.Padding = new System.Windows.Forms.Padding(3);
-            this.tabAssets.Size = new System.Drawing.Size(758, 238);
+            this.tabAssets.Size = new System.Drawing.Size(877, 560);
             this.tabAssets.TabIndex = 1;
             this.tabAssets.Text = "Show Asset Files";
             this.tabAssets.UseVisualStyleBackColor = true;
             // 
-            // label4
+            // cmdFindAssetFiles
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 3);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(90, 13);
-            this.label4.TabIndex = 13;
-            this.label4.Text = "Show Asset Files:";
+            this.cmdFindAssetFiles.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdFindAssetFiles.Location = new System.Drawing.Point(518, 506);
+            this.cmdFindAssetFiles.Name = "cmdFindAssetFiles";
+            this.cmdFindAssetFiles.Size = new System.Drawing.Size(123, 23);
+            this.cmdFindAssetFiles.TabIndex = 18;
+            this.cmdFindAssetFiles.Text = "Search for files";
+            this.cmdFindAssetFiles.UseVisualStyleBackColor = true;
+            this.cmdFindAssetFiles.Click += new System.EventHandler(this.cmdFindAssetFiles_Click);
             // 
-            // chkRemapAssets
+            // cmdExportShowSAF
             // 
-            this.chkRemapAssets.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkRemapAssets.AutoSize = true;
-            this.chkRemapAssets.Checked = true;
-            this.chkRemapAssets.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkRemapAssets.Location = new System.Drawing.Point(10, 188);
-            this.chkRemapAssets.Name = "chkRemapAssets";
-            this.chkRemapAssets.Size = new System.Drawing.Size(163, 17);
-            this.chkRemapAssets.TabIndex = 14;
-            this.chkRemapAssets.Text = "Remap assets during export?";
-            this.chkRemapAssets.UseVisualStyleBackColor = true;
-            // 
-            // chkCopyAssets
-            // 
-            this.chkCopyAssets.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.chkCopyAssets.AutoSize = true;
-            this.chkCopyAssets.Checked = true;
-            this.chkCopyAssets.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkCopyAssets.Location = new System.Drawing.Point(528, 188);
-            this.chkCopyAssets.Name = "chkCopyAssets";
-            this.chkCopyAssets.Size = new System.Drawing.Size(225, 17);
-            this.chkCopyAssets.TabIndex = 16;
-            this.chkCopyAssets.Text = "Copy assets that were found (green icon)?";
-            this.chkCopyAssets.UseVisualStyleBackColor = true;
+            this.cmdExportShowSAF.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdExportShowSAF.Location = new System.Drawing.Point(796, 531);
+            this.cmdExportShowSAF.Name = "cmdExportShowSAF";
+            this.cmdExportShowSAF.Size = new System.Drawing.Size(75, 23);
+            this.cmdExportShowSAF.TabIndex = 7;
+            this.cmdExportShowSAF.Text = "Export Show";
+            this.cmdExportShowSAF.UseVisualStyleBackColor = true;
+            this.cmdExportShowSAF.Click += new System.EventHandler(this.cmdExport_Click);
             // 
             // listShowAssets
             // 
@@ -332,42 +351,68 @@ namespace XlightsSequenceAdapter
             this.listShowAssets.Location = new System.Drawing.Point(6, 19);
             this.listShowAssets.Name = "listShowAssets";
             this.listShowAssets.SelectedImageIndex = 0;
-            this.listShowAssets.Size = new System.Drawing.Size(746, 159);
+            this.listShowAssets.Size = new System.Drawing.Size(865, 481);
             this.listShowAssets.TabIndex = 17;
             // 
-            // cmdExportShowSAF
+            // chkCopyAssets
             // 
-            this.cmdExportShowSAF.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdExportShowSAF.Location = new System.Drawing.Point(677, 209);
-            this.cmdExportShowSAF.Name = "cmdExportShowSAF";
-            this.cmdExportShowSAF.Size = new System.Drawing.Size(75, 23);
-            this.cmdExportShowSAF.TabIndex = 7;
-            this.cmdExportShowSAF.Text = "Export Show";
-            this.cmdExportShowSAF.UseVisualStyleBackColor = true;
-            this.cmdExportShowSAF.Click += new System.EventHandler(this.cmdExport_Click);
+            this.chkCopyAssets.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkCopyAssets.AutoSize = true;
+            this.chkCopyAssets.Checked = true;
+            this.chkCopyAssets.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkCopyAssets.Location = new System.Drawing.Point(647, 510);
+            this.chkCopyAssets.Name = "chkCopyAssets";
+            this.chkCopyAssets.Size = new System.Drawing.Size(225, 17);
+            this.chkCopyAssets.TabIndex = 16;
+            this.chkCopyAssets.Text = "Copy assets that were found (green icon)?";
+            this.chkCopyAssets.UseVisualStyleBackColor = true;
             // 
-            // cmdFindAssetFiles
+            // chkRemapAssets
             // 
-            this.cmdFindAssetFiles.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdFindAssetFiles.Location = new System.Drawing.Point(399, 184);
-            this.cmdFindAssetFiles.Name = "cmdFindAssetFiles";
-            this.cmdFindAssetFiles.Size = new System.Drawing.Size(123, 23);
-            this.cmdFindAssetFiles.TabIndex = 18;
-            this.cmdFindAssetFiles.Text = "Search for files";
-            this.cmdFindAssetFiles.UseVisualStyleBackColor = true;
-            this.cmdFindAssetFiles.Click += new System.EventHandler(this.cmdFindAssetFiles_Click);
+            this.chkRemapAssets.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkRemapAssets.AutoSize = true;
+            this.chkRemapAssets.Checked = true;
+            this.chkRemapAssets.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkRemapAssets.Location = new System.Drawing.Point(10, 510);
+            this.chkRemapAssets.Name = "chkRemapAssets";
+            this.chkRemapAssets.Size = new System.Drawing.Size(163, 17);
+            this.chkRemapAssets.TabIndex = 14;
+            this.chkRemapAssets.Text = "Remap assets during export?";
+            this.chkRemapAssets.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 3);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(90, 13);
+            this.label4.TabIndex = 13;
+            this.label4.Text = "Show Asset Files:";
             // 
             // tabLayout
             // 
+            this.tabLayout.Controls.Add(this.chkShowMapToSubs);
+            this.tabLayout.Controls.Add(this.chkHideNoEffects);
             this.tabLayout.Controls.Add(this.cmdExportShowLM);
             this.tabLayout.Controls.Add(this.dgvModels);
             this.tabLayout.Location = new System.Drawing.Point(4, 22);
             this.tabLayout.Name = "tabLayout";
             this.tabLayout.Padding = new System.Windows.Forms.Padding(3);
-            this.tabLayout.Size = new System.Drawing.Size(758, 238);
+            this.tabLayout.Size = new System.Drawing.Size(877, 560);
             this.tabLayout.TabIndex = 0;
             this.tabLayout.Text = "Layout Mapping";
             this.tabLayout.UseVisualStyleBackColor = true;
+            // 
+            // cmdExportShowLM
+            // 
+            this.cmdExportShowLM.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdExportShowLM.Location = new System.Drawing.Point(796, 531);
+            this.cmdExportShowLM.Name = "cmdExportShowLM";
+            this.cmdExportShowLM.Size = new System.Drawing.Size(75, 23);
+            this.cmdExportShowLM.TabIndex = 8;
+            this.cmdExportShowLM.Text = "Export Show";
+            this.cmdExportShowLM.UseVisualStyleBackColor = true;
+            this.cmdExportShowLM.Click += new System.EventHandler(this.cmdExportShowLM_Click);
             // 
             // dgvModels
             // 
@@ -388,8 +433,44 @@ namespace XlightsSequenceAdapter
             this.dgvModels.Location = new System.Drawing.Point(3, 3);
             this.dgvModels.Name = "dgvModels";
             this.dgvModels.RowHeadersVisible = false;
-            this.dgvModels.Size = new System.Drawing.Size(749, 200);
+            this.dgvModels.Size = new System.Drawing.Size(868, 522);
             this.dgvModels.TabIndex = 6;
+            // 
+            // colShowModel
+            // 
+            this.colShowModel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colShowModel.FillWeight = 25F;
+            this.colShowModel.HeaderText = "Show Models";
+            this.colShowModel.Name = "colShowModel";
+            // 
+            // colModelFXLayers
+            // 
+            this.colModelFXLayers.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colModelFXLayers.FillWeight = 10F;
+            this.colModelFXLayers.HeaderText = "Layers";
+            this.colModelFXLayers.Name = "colModelFXLayers";
+            // 
+            // colModelFXCount
+            // 
+            this.colModelFXCount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colModelFXCount.FillWeight = 10F;
+            this.colModelFXCount.HeaderText = "Effect Count";
+            this.colModelFXCount.Name = "colModelFXCount";
+            // 
+            // colModelFXDuration
+            // 
+            this.colModelFXDuration.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colModelFXDuration.FillWeight = 15F;
+            this.colModelFXDuration.HeaderText = "Effect Duration";
+            this.colModelFXDuration.Name = "colModelFXDuration";
+            // 
+            // colModelFX
+            // 
+            this.colModelFX.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colModelFX.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
+            this.colModelFX.FillWeight = 25F;
+            this.colModelFX.HeaderText = "Model Effects";
+            this.colModelFX.Name = "colModelFX";
             // 
             // colMapTo
             // 
@@ -400,52 +481,6 @@ namespace XlightsSequenceAdapter
             this.colMapTo.Name = "colMapTo";
             this.colMapTo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colMapTo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // colModelFX
-            // 
-            this.colModelFX.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colModelFX.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
-            this.colModelFX.FillWeight = 25F;
-            this.colModelFX.HeaderText = "Model Effects";
-            this.colModelFX.Name = "colModelFX";
-            // 
-            // colModelFXDuration
-            // 
-            this.colModelFXDuration.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colModelFXDuration.FillWeight = 15F;
-            this.colModelFXDuration.HeaderText = "Effect Duration";
-            this.colModelFXDuration.Name = "colModelFXDuration";
-            // 
-            // colModelFXCount
-            // 
-            this.colModelFXCount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colModelFXCount.FillWeight = 10F;
-            this.colModelFXCount.HeaderText = "Effect Count";
-            this.colModelFXCount.Name = "colModelFXCount";
-            // 
-            // colModelFXLayers
-            // 
-            this.colModelFXLayers.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colModelFXLayers.FillWeight = 10F;
-            this.colModelFXLayers.HeaderText = "Layers";
-            this.colModelFXLayers.Name = "colModelFXLayers";
-            // 
-            // colShowModel
-            // 
-            this.colShowModel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colShowModel.FillWeight = 25F;
-            this.colShowModel.HeaderText = "Show Models";
-            this.colShowModel.Name = "colShowModel";
-            // 
-            // cmdExportShowLM
-            // 
-            this.cmdExportShowLM.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdExportShowLM.Location = new System.Drawing.Point(677, 209);
-            this.cmdExportShowLM.Name = "cmdExportShowLM";
-            this.cmdExportShowLM.Size = new System.Drawing.Size(75, 23);
-            this.cmdExportShowLM.TabIndex = 8;
-            this.cmdExportShowLM.Text = "Export Show";
-            this.cmdExportShowLM.UseVisualStyleBackColor = true;
             // 
             // tabControl1
             // 
@@ -459,44 +494,38 @@ namespace XlightsSequenceAdapter
             this.tabControl1.Location = new System.Drawing.Point(12, 63);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(766, 264);
+            this.tabControl1.Size = new System.Drawing.Size(885, 586);
             this.tabControl1.TabIndex = 12;
             // 
-            // cmdGetList
+            // chkHideNoEffects
             // 
-            this.cmdGetList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdGetList.Location = new System.Drawing.Point(573, 103);
-            this.cmdGetList.Name = "cmdGetList";
-            this.cmdGetList.Size = new System.Drawing.Size(97, 23);
-            this.cmdGetList.TabIndex = 15;
-            this.cmdGetList.Text = "Get Show List";
-            this.cmdGetList.UseVisualStyleBackColor = true;
-            this.cmdGetList.Click += new System.EventHandler(this.cmdGetList_Click);
+            this.chkHideNoEffects.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkHideNoEffects.AutoSize = true;
+            this.chkHideNoEffects.Location = new System.Drawing.Point(6, 535);
+            this.chkHideNoEffects.Name = "chkHideNoEffects";
+            this.chkHideNoEffects.Size = new System.Drawing.Size(159, 17);
+            this.chkHideNoEffects.TabIndex = 9;
+            this.chkHideNoEffects.Text = "Hide models with no effects.";
+            this.chkHideNoEffects.UseVisualStyleBackColor = true;
+            this.chkHideNoEffects.CheckedChanged += new System.EventHandler(this.chkHideNoEffects_CheckedChanged);
             // 
-            // colFullPath
+            // chkShowMapToSubs
             // 
-            this.colFullPath.HeaderText = "Full Path";
-            this.colFullPath.Name = "colFullPath";
-            this.colFullPath.ReadOnly = true;
-            this.colFullPath.Width = 73;
-            // 
-            // cmdPersonalize
-            // 
-            this.cmdPersonalize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdPersonalize.Enabled = false;
-            this.cmdPersonalize.Location = new System.Drawing.Point(676, 103);
-            this.cmdPersonalize.Name = "cmdPersonalize";
-            this.cmdPersonalize.Size = new System.Drawing.Size(75, 23);
-            this.cmdPersonalize.TabIndex = 16;
-            this.cmdPersonalize.Text = "Personalize";
-            this.cmdPersonalize.UseVisualStyleBackColor = true;
-            this.cmdPersonalize.Click += new System.EventHandler(this.cmdPersonalize_Click);
+            this.chkShowMapToSubs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkShowMapToSubs.AutoSize = true;
+            this.chkShowMapToSubs.Location = new System.Drawing.Point(610, 535);
+            this.chkShowMapToSubs.Name = "chkShowMapToSubs";
+            this.chkShowMapToSubs.Size = new System.Drawing.Size(170, 17);
+            this.chkShowMapToSubs.TabIndex = 10;
+            this.chkShowMapToSubs.Text = "Show submodels in map to list.";
+            this.chkShowMapToSubs.UseVisualStyleBackColor = true;
+            this.chkShowMapToSubs.CheckedChanged += new System.EventHandler(this.chkShowMapToSubs_CheckedChanged);
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(779, 331);
+            this.ClientSize = new System.Drawing.Size(898, 653);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.lblShowName);
             this.Controls.Add(this.cmdOpenShow);
@@ -515,6 +544,7 @@ namespace XlightsSequenceAdapter
             this.tabAssets.ResumeLayout(false);
             this.tabAssets.PerformLayout();
             this.tabLayout.ResumeLayout(false);
+            this.tabLayout.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvModels)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -565,6 +595,8 @@ namespace XlightsSequenceAdapter
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFullPath;
         private System.Windows.Forms.Button cmdPersonalize;
+        private System.Windows.Forms.CheckBox chkHideNoEffects;
+        private System.Windows.Forms.CheckBox chkShowMapToSubs;
     }
 }
 

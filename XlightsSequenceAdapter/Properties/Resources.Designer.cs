@@ -64,8 +64,8 @@ namespace XlightsSequenceAdapter.Properties {
         ///   Looks up a localized string similar to {\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
         ///{\colortbl ;\red0\green0\blue255;}
         ///{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
-        ///\pard\sa200\sl276\slmult1\f0\fs22\lang9 For a video overview of the xLights Adapter utilty, see: {{\field{\*\fldinst{HYPERLINK https://youtu.be/csBCWmtBTrU }}{\fldrslt{https://youtu.be/csBCWmtBTrU\ul0\cf0}}}}\f0\fs22\par
-        ///To start, you will select your show folder.  This folder contains xlights_rgbeffects.xml which is a file that  [rest of string was truncated]&quot;;.
+        ///\pard\sa200\sl276\slmult1\f0\fs22\lang9 For a video overview of the xLights Adapter utilty, see: {{\field{\*\fldinst{HYPERLINK https://www.youtube.com/watch?v=csBCWmtBTrU&amp;feature=youtu.be&amp;t=137 }}{\fldrslt{https://www.youtube.com/watch?v=csBCWmtBTrU&amp;feature=youtu.be&amp;t=137\ul0\cf0}}}}\f0\fs22\par
+        ///To start, you will select your sho [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string xLightsAdapterHelp {
             get {

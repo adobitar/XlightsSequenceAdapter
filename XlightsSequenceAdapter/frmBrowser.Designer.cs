@@ -34,13 +34,19 @@ namespace XlightsSequenceAdapter
             this.lnklblWorkingPath = new System.Windows.Forms.LinkLabel();
             this.txtPizPath = new System.Windows.Forms.TextBox();
             this.dgvFileList = new System.Windows.Forms.DataGridView();
+            this.contextMenuStripXSeq = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItemOpenInXLights = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.diagFolderBrowser = new System.Windows.Forms.FolderBrowserDialog();
             this.progBar = new System.Windows.Forms.ProgressBar();
             this.cmdPersonalize = new System.Windows.Forms.Button();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.cmdAnalyze = new System.Windows.Forms.Button();
             this.cmdMoveFiles = new System.Windows.Forms.Button();
+            this.viewColsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFileList)).BeginInit();
+            this.contextMenuStripXSeq.SuspendLayout();
             this.SuspendLayout();
             // 
             // cmdGetList
@@ -81,13 +87,39 @@ namespace XlightsSequenceAdapter
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvFileList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvFileList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvFileList.ContextMenuStrip = this.contextMenuStripXSeq;
             this.dgvFileList.Location = new System.Drawing.Point(12, 65);
             this.dgvFileList.Name = "dgvFileList";
             this.dgvFileList.ReadOnly = true;
             this.dgvFileList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dgvFileList.Size = new System.Drawing.Size(660, 234);
             this.dgvFileList.TabIndex = 16;
+            this.dgvFileList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFileList_CellDoubleClick);
+            this.dgvFileList.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvFileList_CellMouseDown);
             this.dgvFileList.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFileList_CellValueChanged);
+            this.dgvFileList.MouseMove += new System.Windows.Forms.MouseEventHandler(this.dgvFileList_MouseMove);
+            // 
+            // contextMenuStripXSeq
+            // 
+            this.contextMenuStripXSeq.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemOpenInXLights,
+            this.openFolderToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.viewColsToolStripMenuItem});
+            this.contextMenuStripXSeq.Name = "contextMenuStripXSeq";
+            this.contextMenuStripXSeq.Size = new System.Drawing.Size(181, 98);
+            // 
+            // toolStripMenuItemOpenInXLights
+            // 
+            this.toolStripMenuItemOpenInXLights.Name = "toolStripMenuItemOpenInXLights";
+            this.toolStripMenuItemOpenInXLights.Size = new System.Drawing.Size(157, 22);
+            this.toolStripMenuItemOpenInXLights.Text = "Open In xLights";
+            this.toolStripMenuItemOpenInXLights.Click += new System.EventHandler(this.toolStripMenuItemOpenInXLights_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(154, 6);
             // 
             // progBar
             // 
@@ -131,6 +163,19 @@ namespace XlightsSequenceAdapter
             this.cmdMoveFiles.UseVisualStyleBackColor = true;
             this.cmdMoveFiles.Click += new System.EventHandler(this.cmdMoveFiles_Click);
             // 
+            // viewColsToolStripMenuItem
+            // 
+            this.viewColsToolStripMenuItem.Name = "viewColsToolStripMenuItem";
+            this.viewColsToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.viewColsToolStripMenuItem.Text = "View Cols";
+            // 
+            // openFolderToolStripMenuItem
+            // 
+            this.openFolderToolStripMenuItem.Name = "openFolderToolStripMenuItem";
+            this.openFolderToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openFolderToolStripMenuItem.Text = "Open Folder";
+            this.openFolderToolStripMenuItem.Click += new System.EventHandler(this.openFolderToolStripMenuItem_Click);
+            // 
             // frmBrowser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -148,6 +193,7 @@ namespace XlightsSequenceAdapter
             this.Name = "frmBrowser";
             this.Text = "Sequence and File Browser";
             ((System.ComponentModel.ISupportInitialize)(this.dgvFileList)).EndInit();
+            this.contextMenuStripXSeq.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -165,5 +211,10 @@ namespace XlightsSequenceAdapter
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.Button cmdAnalyze;
         private System.Windows.Forms.Button cmdMoveFiles;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripXSeq;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemOpenInXLights;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem viewColsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openFolderToolStripMenuItem;
     }
 }

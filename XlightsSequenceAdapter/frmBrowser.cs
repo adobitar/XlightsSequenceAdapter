@@ -1,13 +1,10 @@
-﻿using FastMember;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
@@ -136,7 +133,7 @@ namespace XlightsSequenceAdapter
 
             dgvFileList.ReadOnly = false;
 
-            dgvFileList.Columns["FileFullName"].Visible = false;
+            dgvFileList.Columns["FileFullname"].Visible = false;
             dgvFileList.Columns["XLightsVersion"].Visible = false;
             dgvFileList.Columns["AuthorEmail"].Visible = false;
             dgvFileList.Columns["AuthorWebsite"].Visible = false;
@@ -146,21 +143,82 @@ namespace XlightsSequenceAdapter
             dgvFileList.Columns["MediaFile"].Visible = false;
             dgvFileList.Columns["SequenceDuration"].Visible = false;
             dgvFileList.Columns["ImageDir"].Visible = false;
+            dgvFileList.Columns["XLAFile"].Visible = false;
+            dgvFileList.Columns["Artist"].Visible = false;
+            dgvFileList.Columns["Album"].Visible = false;
+            dgvFileList.Columns["MusicURL"].Visible = false;
+            dgvFileList.Columns["ParseWarning"].Visible = false;
             //dgvFileList.Columns["ModelDisplayelements"].Visible = false;
+
+            foreach (var prop in typeof(XSEQ).GetProperties())
+            {
+                if (prop.PropertyType != typeof(String))
+                    continue;
+                else if (prop.Name == "ParseWarning")
+                    continue;
+
+                ToolStripMenuItem item = new ToolStripMenuItem();
+                item.Text = prop.Name;
+                item.CheckOnClick = true;
+                item.Click += ToggleColVisibilityOnItem_Click;
+
+                switch (prop.Name)
+                {
+                    case "FileFullname":
+                    case "XLightsVersion":
+                    case "AuthorEmail":
+                    case "AuthorWebsite":
+                    case "AuthorComment":
+                    case "SequenceTiming":
+                    case "SequenceType":
+                    case "MediaFile":
+                    case "SequenceDuration":
+                    case "ImageDir":
+                    case "XLAFile":
+                    case "Artist":
+                    case "Album":
+                    case "MusicURL":
+                        item.Checked = false;
+                        break;
+                    default:
+                        item.Checked = true;
+                        break;
+                }
+
+                viewColsToolStripMenuItem.DropDownItems.Add(item);
+            }
 
             foreach (DataGridViewColumn c in dgvFileList.Columns)
             { 
                 c.ReadOnly = true;
+                c.DefaultCellStyle.BackColor = SystemColors.Control;
             }
 
             dgvFileList.Columns["Category"].ReadOnly = false;
+            dgvFileList.Columns["Category"].DefaultCellStyle.BackColor = Color.White;
+
             dgvFileList.Columns["Credit"].ReadOnly = false;
+            dgvFileList.Columns["Credit"].DefaultCellStyle.BackColor = Color.White;
+
             dgvFileList.Columns["VideoURL"].ReadOnly = false;
+            dgvFileList.Columns["VideoURL"].DefaultCellStyle.BackColor = Color.White;
+
             dgvFileList.Columns["ShareSource"].ReadOnly = false;
+            dgvFileList.Columns["ShareSource"].DefaultCellStyle.BackColor = Color.White;
+
             dgvFileList.Columns["ShareURL"].ReadOnly = false;
+            dgvFileList.Columns["ShareURL"].DefaultCellStyle.BackColor = Color.White;
+
             dgvFileList.Columns["Notes"].ReadOnly = false;
+            dgvFileList.Columns["Notes"].DefaultCellStyle.BackColor = Color.White;
 
             cmdPersonalize.Visible = true;
+        }
+
+        private void ToggleColVisibilityOnItem_Click(object sender, EventArgs e)
+        {
+            // MessageBox.Show(sender.ToString());
+            dgvFileList.Columns[sender.ToString()].Visible = !dgvFileList.Columns[sender.ToString()].Visible;
         }
 
         private void lnklblWorkingPath_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -350,5 +408,51 @@ namespace XlightsSequenceAdapter
             dgvFileList.DataSource = new BindingSource(new BindingList<PersonalizationStatus>(resultsReport), null);
         }
 
+        private void dgvFileList_MouseMove(object sender, MouseEventArgs e)
+        {
+            //// See which row is currently under the mouse:
+            //int newHoveredIndex = dgvFileList.IndexFromPoint(e.Location);
+
+            //// If the row has changed since last moving the mouse:
+            //if (hoveredIndex != newHoveredIndex)
+            //{
+            //    // Change the variable for the next time we move the mouse:
+            //    hoveredIndex = newHoveredIndex;
+
+            //    // If over a row showing data (rather than blank space):
+            //    if (hoveredIndex > -1)
+            //    {
+            //        //Set tooltip text for the row now under the mouse:
+            //        tt1.Active = false;
+            //        tt1.SetToolTip(lstCars, ((Car)lstCars.Items[hoveredIndex]).Info);
+            //        tt1.Active = true;
+            //    }
+            //}
+
+        }
+
+        private void dgvFileList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+        }
+
+        private int dgvFileListRowContext = 0;
+        private void dgvFileList_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            dgvFileListRowContext = e.RowIndex;
+        }
+
+        private void toolStripMenuItemOpenInXLights_Click(object sender, EventArgs e)
+        {
+            XSEQ seq = dgvFileList.Rows[dgvFileListRowContext].DataBoundItem as XSEQ;
+
+            System.Diagnostics.Process.Start(seq.FileFullname);
+        }
+
+        private void openFolderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            XSEQ seq = dgvFileList.Rows[dgvFileListRowContext].DataBoundItem as XSEQ;
+
+            System.Diagnostics.Process.Start(seq.Filepath);
+        }
     }
 }

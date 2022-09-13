@@ -418,7 +418,7 @@ namespace XlightsSequenceAdapter
 
                 
                 if (doc.Elements("sequence").Any() && doc.Element("sequence").Elements("Credit").Any())
-                    seq.Category = elementValue(doc.Element("sequence").Element("Credit"));
+                    seq.Credit = elementValue(doc.Element("sequence").Element("Credit"));
 
                 if (doc.Elements("sequence").Any() && doc.Element("sequence").Elements("VideoURL").Any())
                     seq.VideoURL = elementValue(doc.Element("sequence").Element("VideoURL"));

@@ -703,6 +703,10 @@ namespace XlightsSequenceAdapter
         private void cmdFindAssetFiles_Click(object sender, EventArgs e)
         {
             // look in show directory and below for files listed in listShowAssets
+            diagFolderBrowser.Description = "Select root location to begin search.  The path to the sequence file has been selected by default.  You may want to go up a directory or two.";
+            diagFolderBrowser.SelectedPath = ShowPath;
+            diagFolderBrowser.ShowDialog();
+            string searchPath = diagFolderBrowser.SelectedPath;
 
             string filename;
             string[] files;
@@ -712,7 +716,7 @@ namespace XlightsSequenceAdapter
                 filename = Path.GetFileName(file.Text);
 
                 // TODO: Need to handle duplicate files (same filename in different directories).
-                files = Directory.GetFiles(ShowPath, filename, SearchOption.AllDirectories);
+                files = Directory.GetFiles(searchPath, filename, SearchOption.AllDirectories);
 
                 if (files.Length > 0)
                     assets.AddRange(files);

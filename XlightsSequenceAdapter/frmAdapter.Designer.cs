@@ -42,24 +42,26 @@ namespace XlightsSequenceAdapter
             this.diagSaveFile = new System.Windows.Forms.SaveFileDialog();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.tabAssets = new System.Windows.Forms.TabPage();
-            this.label4 = new System.Windows.Forms.Label();
-            this.chkRemapAssets = new System.Windows.Forms.CheckBox();
-            this.chkCopyAssets = new System.Windows.Forms.CheckBox();
-            this.listShowAssets = new System.Windows.Forms.TreeView();
-            this.cmdExportShowSAF = new System.Windows.Forms.Button();
             this.cmdFindAssetFiles = new System.Windows.Forms.Button();
+            this.cmdExportShowSAF = new System.Windows.Forms.Button();
+            this.listShowAssets = new System.Windows.Forms.TreeView();
+            this.chkCopyAssets = new System.Windows.Forms.CheckBox();
+            this.chkRemapAssets = new System.Windows.Forms.CheckBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.tabLayout = new System.Windows.Forms.TabPage();
-            this.dgvModels = new System.Windows.Forms.DataGridView();
-            this.colMapTo = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.colModelFX = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.colModelFXDuration = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colModelFXCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colModelFXLayers = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colShowModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cmdExportShowLM = new System.Windows.Forms.Button();
-            this.chkHideNoEffects = new System.Windows.Forms.CheckBox();
             this.chkShowMapToSubs = new System.Windows.Forms.CheckBox();
+            this.chkHideNoEffects = new System.Windows.Forms.CheckBox();
+            this.cmdExportShowLM = new System.Windows.Forms.Button();
+            this.dgvModels = new System.Windows.Forms.DataGridView();
+            this.colShowModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colModelFXLayers = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colModelFXCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colModelFXDuration = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colModelFX = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.colMapTo = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.linkAssetLocation = new System.Windows.Forms.LinkLabel();
+            this.lblAssetLocation = new System.Windows.Forms.Label();
             this.tabAssets.SuspendLayout();
             this.tabLayout.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvModels)).BeginInit();
@@ -137,6 +139,8 @@ namespace XlightsSequenceAdapter
             // 
             // tabAssets
             // 
+            this.tabAssets.Controls.Add(this.lblAssetLocation);
+            this.tabAssets.Controls.Add(this.linkAssetLocation);
             this.tabAssets.Controls.Add(this.cmdFindAssetFiles);
             this.tabAssets.Controls.Add(this.cmdExportShowSAF);
             this.tabAssets.Controls.Add(this.listShowAssets);
@@ -151,40 +155,27 @@ namespace XlightsSequenceAdapter
             this.tabAssets.Text = "Show Asset Files";
             this.tabAssets.UseVisualStyleBackColor = true;
             // 
-            // label4
+            // cmdFindAssetFiles
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 3);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(90, 13);
-            this.label4.TabIndex = 13;
-            this.label4.Text = "Show Asset Files:";
+            this.cmdFindAssetFiles.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdFindAssetFiles.Location = new System.Drawing.Point(564, 535);
+            this.cmdFindAssetFiles.Name = "cmdFindAssetFiles";
+            this.cmdFindAssetFiles.Size = new System.Drawing.Size(123, 23);
+            this.cmdFindAssetFiles.TabIndex = 18;
+            this.cmdFindAssetFiles.Text = "Search for files";
+            this.cmdFindAssetFiles.UseVisualStyleBackColor = true;
+            this.cmdFindAssetFiles.Click += new System.EventHandler(this.cmdFindAssetFiles_Click);
             // 
-            // chkRemapAssets
+            // cmdExportShowSAF
             // 
-            this.chkRemapAssets.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkRemapAssets.AutoSize = true;
-            this.chkRemapAssets.Checked = true;
-            this.chkRemapAssets.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkRemapAssets.Location = new System.Drawing.Point(10, 539);
-            this.chkRemapAssets.Name = "chkRemapAssets";
-            this.chkRemapAssets.Size = new System.Drawing.Size(163, 17);
-            this.chkRemapAssets.TabIndex = 14;
-            this.chkRemapAssets.Text = "Remap assets during export?";
-            this.chkRemapAssets.UseVisualStyleBackColor = true;
-            // 
-            // chkCopyAssets
-            // 
-            this.chkCopyAssets.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.chkCopyAssets.AutoSize = true;
-            this.chkCopyAssets.Checked = true;
-            this.chkCopyAssets.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkCopyAssets.Location = new System.Drawing.Point(693, 539);
-            this.chkCopyAssets.Name = "chkCopyAssets";
-            this.chkCopyAssets.Size = new System.Drawing.Size(225, 17);
-            this.chkCopyAssets.TabIndex = 16;
-            this.chkCopyAssets.Text = "Copy assets that were found (green icon)?";
-            this.chkCopyAssets.UseVisualStyleBackColor = true;
+            this.cmdExportShowSAF.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdExportShowSAF.Location = new System.Drawing.Point(842, 560);
+            this.cmdExportShowSAF.Name = "cmdExportShowSAF";
+            this.cmdExportShowSAF.Size = new System.Drawing.Size(75, 23);
+            this.cmdExportShowSAF.TabIndex = 7;
+            this.cmdExportShowSAF.Text = "Export Show";
+            this.cmdExportShowSAF.UseVisualStyleBackColor = true;
+            this.cmdExportShowSAF.Click += new System.EventHandler(this.cmdExport_Click);
             // 
             // listShowAssets
             // 
@@ -199,27 +190,41 @@ namespace XlightsSequenceAdapter
             this.listShowAssets.Size = new System.Drawing.Size(911, 510);
             this.listShowAssets.TabIndex = 17;
             // 
-            // cmdExportShowSAF
+            // chkCopyAssets
             // 
-            this.cmdExportShowSAF.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdExportShowSAF.Location = new System.Drawing.Point(842, 560);
-            this.cmdExportShowSAF.Name = "cmdExportShowSAF";
-            this.cmdExportShowSAF.Size = new System.Drawing.Size(75, 23);
-            this.cmdExportShowSAF.TabIndex = 7;
-            this.cmdExportShowSAF.Text = "Export Show";
-            this.cmdExportShowSAF.UseVisualStyleBackColor = true;
-            this.cmdExportShowSAF.Click += new System.EventHandler(this.cmdExport_Click);
+            this.chkCopyAssets.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkCopyAssets.AutoSize = true;
+            this.chkCopyAssets.Checked = true;
+            this.chkCopyAssets.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkCopyAssets.Location = new System.Drawing.Point(693, 539);
+            this.chkCopyAssets.Name = "chkCopyAssets";
+            this.chkCopyAssets.Size = new System.Drawing.Size(225, 17);
+            this.chkCopyAssets.TabIndex = 16;
+            this.chkCopyAssets.Text = "Copy assets that were found (green icon)?";
+            this.chkCopyAssets.UseVisualStyleBackColor = true;
             // 
-            // cmdFindAssetFiles
+            // chkRemapAssets
             // 
-            this.cmdFindAssetFiles.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdFindAssetFiles.Location = new System.Drawing.Point(564, 535);
-            this.cmdFindAssetFiles.Name = "cmdFindAssetFiles";
-            this.cmdFindAssetFiles.Size = new System.Drawing.Size(123, 23);
-            this.cmdFindAssetFiles.TabIndex = 18;
-            this.cmdFindAssetFiles.Text = "Search for files";
-            this.cmdFindAssetFiles.UseVisualStyleBackColor = true;
-            this.cmdFindAssetFiles.Click += new System.EventHandler(this.cmdFindAssetFiles_Click);
+            this.chkRemapAssets.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkRemapAssets.AutoSize = true;
+            this.chkRemapAssets.Checked = true;
+            this.chkRemapAssets.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkRemapAssets.Location = new System.Drawing.Point(10, 539);
+            this.chkRemapAssets.Name = "chkRemapAssets";
+            this.chkRemapAssets.Size = new System.Drawing.Size(163, 17);
+            this.chkRemapAssets.TabIndex = 14;
+            this.chkRemapAssets.Text = "Remap assets during export?";
+            this.chkRemapAssets.UseVisualStyleBackColor = true;
+            this.chkRemapAssets.CheckedChanged += new System.EventHandler(this.chkRemapAssets_CheckedChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 3);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(90, 13);
+            this.label4.TabIndex = 13;
+            this.label4.Text = "Show Asset Files:";
             // 
             // tabLayout
             // 
@@ -234,6 +239,41 @@ namespace XlightsSequenceAdapter
             this.tabLayout.TabIndex = 0;
             this.tabLayout.Text = "Layout Mapping";
             this.tabLayout.UseVisualStyleBackColor = true;
+            // 
+            // chkShowMapToSubs
+            // 
+            this.chkShowMapToSubs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkShowMapToSubs.AutoSize = true;
+            this.chkShowMapToSubs.Location = new System.Drawing.Point(656, 564);
+            this.chkShowMapToSubs.Name = "chkShowMapToSubs";
+            this.chkShowMapToSubs.Size = new System.Drawing.Size(170, 17);
+            this.chkShowMapToSubs.TabIndex = 10;
+            this.chkShowMapToSubs.Text = "Show submodels in map to list.";
+            this.chkShowMapToSubs.UseVisualStyleBackColor = true;
+            this.chkShowMapToSubs.CheckedChanged += new System.EventHandler(this.chkShowMapToSubs_CheckedChanged);
+            // 
+            // chkHideNoEffects
+            // 
+            this.chkHideNoEffects.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkHideNoEffects.AutoSize = true;
+            this.chkHideNoEffects.Location = new System.Drawing.Point(6, 564);
+            this.chkHideNoEffects.Name = "chkHideNoEffects";
+            this.chkHideNoEffects.Size = new System.Drawing.Size(159, 17);
+            this.chkHideNoEffects.TabIndex = 9;
+            this.chkHideNoEffects.Text = "Hide models with no effects.";
+            this.chkHideNoEffects.UseVisualStyleBackColor = true;
+            this.chkHideNoEffects.CheckedChanged += new System.EventHandler(this.chkHideNoEffects_CheckedChanged);
+            // 
+            // cmdExportShowLM
+            // 
+            this.cmdExportShowLM.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdExportShowLM.Location = new System.Drawing.Point(842, 560);
+            this.cmdExportShowLM.Name = "cmdExportShowLM";
+            this.cmdExportShowLM.Size = new System.Drawing.Size(75, 23);
+            this.cmdExportShowLM.TabIndex = 8;
+            this.cmdExportShowLM.Text = "Export Show";
+            this.cmdExportShowLM.UseVisualStyleBackColor = true;
+            this.cmdExportShowLM.Click += new System.EventHandler(this.cmdExportShowLM_Click);
             // 
             // dgvModels
             // 
@@ -257,15 +297,33 @@ namespace XlightsSequenceAdapter
             this.dgvModels.Size = new System.Drawing.Size(914, 551);
             this.dgvModels.TabIndex = 6;
             // 
-            // colMapTo
+            // colShowModel
             // 
-            this.colMapTo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colMapTo.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
-            this.colMapTo.FillWeight = 25F;
-            this.colMapTo.HeaderText = "Map To";
-            this.colMapTo.Name = "colMapTo";
-            this.colMapTo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colMapTo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.colShowModel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colShowModel.FillWeight = 25F;
+            this.colShowModel.HeaderText = "Show Models";
+            this.colShowModel.Name = "colShowModel";
+            // 
+            // colModelFXLayers
+            // 
+            this.colModelFXLayers.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colModelFXLayers.FillWeight = 10F;
+            this.colModelFXLayers.HeaderText = "Layers";
+            this.colModelFXLayers.Name = "colModelFXLayers";
+            // 
+            // colModelFXCount
+            // 
+            this.colModelFXCount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colModelFXCount.FillWeight = 10F;
+            this.colModelFXCount.HeaderText = "Effect Count";
+            this.colModelFXCount.Name = "colModelFXCount";
+            // 
+            // colModelFXDuration
+            // 
+            this.colModelFXDuration.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colModelFXDuration.FillWeight = 15F;
+            this.colModelFXDuration.HeaderText = "Effect Duration";
+            this.colModelFXDuration.Name = "colModelFXDuration";
             // 
             // colModelFX
             // 
@@ -275,68 +333,15 @@ namespace XlightsSequenceAdapter
             this.colModelFX.HeaderText = "Model Effects";
             this.colModelFX.Name = "colModelFX";
             // 
-            // colModelFXDuration
+            // colMapTo
             // 
-            this.colModelFXDuration.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colModelFXDuration.FillWeight = 15F;
-            this.colModelFXDuration.HeaderText = "Effect Duration";
-            this.colModelFXDuration.Name = "colModelFXDuration";
-            // 
-            // colModelFXCount
-            // 
-            this.colModelFXCount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colModelFXCount.FillWeight = 10F;
-            this.colModelFXCount.HeaderText = "Effect Count";
-            this.colModelFXCount.Name = "colModelFXCount";
-            // 
-            // colModelFXLayers
-            // 
-            this.colModelFXLayers.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colModelFXLayers.FillWeight = 10F;
-            this.colModelFXLayers.HeaderText = "Layers";
-            this.colModelFXLayers.Name = "colModelFXLayers";
-            // 
-            // colShowModel
-            // 
-            this.colShowModel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colShowModel.FillWeight = 25F;
-            this.colShowModel.HeaderText = "Show Models";
-            this.colShowModel.Name = "colShowModel";
-            // 
-            // cmdExportShowLM
-            // 
-            this.cmdExportShowLM.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdExportShowLM.Location = new System.Drawing.Point(842, 560);
-            this.cmdExportShowLM.Name = "cmdExportShowLM";
-            this.cmdExportShowLM.Size = new System.Drawing.Size(75, 23);
-            this.cmdExportShowLM.TabIndex = 8;
-            this.cmdExportShowLM.Text = "Export Show";
-            this.cmdExportShowLM.UseVisualStyleBackColor = true;
-            this.cmdExportShowLM.Click += new System.EventHandler(this.cmdExportShowLM_Click);
-            // 
-            // chkHideNoEffects
-            // 
-            this.chkHideNoEffects.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkHideNoEffects.AutoSize = true;
-            this.chkHideNoEffects.Location = new System.Drawing.Point(6, 564);
-            this.chkHideNoEffects.Name = "chkHideNoEffects";
-            this.chkHideNoEffects.Size = new System.Drawing.Size(159, 17);
-            this.chkHideNoEffects.TabIndex = 9;
-            this.chkHideNoEffects.Text = "Hide models with no effects.";
-            this.chkHideNoEffects.UseVisualStyleBackColor = true;
-            this.chkHideNoEffects.CheckedChanged += new System.EventHandler(this.chkHideNoEffects_CheckedChanged);
-            // 
-            // chkShowMapToSubs
-            // 
-            this.chkShowMapToSubs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.chkShowMapToSubs.AutoSize = true;
-            this.chkShowMapToSubs.Location = new System.Drawing.Point(656, 564);
-            this.chkShowMapToSubs.Name = "chkShowMapToSubs";
-            this.chkShowMapToSubs.Size = new System.Drawing.Size(170, 17);
-            this.chkShowMapToSubs.TabIndex = 10;
-            this.chkShowMapToSubs.Text = "Show submodels in map to list.";
-            this.chkShowMapToSubs.UseVisualStyleBackColor = true;
-            this.chkShowMapToSubs.CheckedChanged += new System.EventHandler(this.chkShowMapToSubs_CheckedChanged);
+            this.colMapTo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colMapTo.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
+            this.colMapTo.FillWeight = 25F;
+            this.colMapTo.HeaderText = "Map To";
+            this.colMapTo.Name = "colMapTo";
+            this.colMapTo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colMapTo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // tabControl1
             // 
@@ -350,6 +355,26 @@ namespace XlightsSequenceAdapter
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(931, 615);
             this.tabControl1.TabIndex = 12;
+            // 
+            // linkAssetLocation
+            // 
+            this.linkAssetLocation.AutoSize = true;
+            this.linkAssetLocation.Location = new System.Drawing.Point(33, 560);
+            this.linkAssetLocation.Name = "linkAssetLocation";
+            this.linkAssetLocation.Size = new System.Drawing.Size(145, 13);
+            this.linkAssetLocation.TabIndex = 19;
+            this.linkAssetLocation.TabStop = true;
+            this.linkAssetLocation.Text = "Copy assets to new folder in: ";
+            this.linkAssetLocation.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkAssetLocation_LinkClicked);
+            // 
+            // lblAssetLocation
+            // 
+            this.lblAssetLocation.AutoSize = true;
+            this.lblAssetLocation.Location = new System.Drawing.Point(185, 560);
+            this.lblAssetLocation.Name = "lblAssetLocation";
+            this.lblAssetLocation.Size = new System.Drawing.Size(83, 13);
+            this.lblAssetLocation.TabIndex = 20;
+            this.lblAssetLocation.Text = "[Asset Location]";
             // 
             // frmAdapter
             // 
@@ -409,6 +434,8 @@ namespace XlightsSequenceAdapter
         private System.Windows.Forms.DataGridViewComboBoxColumn colModelFX;
         private System.Windows.Forms.DataGridViewComboBoxColumn colMapTo;
         private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.Label lblAssetLocation;
+        private System.Windows.Forms.LinkLabel linkAssetLocation;
     }
 }
 

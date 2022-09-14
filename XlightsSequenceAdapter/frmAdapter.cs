@@ -17,6 +17,7 @@ namespace XlightsSequenceAdapter
         string ShowFileToAdapt = "";
         string ShowPath = "";
         string layoutPath = Settings.layoutPath;
+        string assetsPath = Settings.assetsPath;
         XElement myPerspectives;
         const string layoutFile = Settings.LAYOUTFILE;
         const string noselection = Settings.NOSELECTION;
@@ -36,18 +37,31 @@ namespace XlightsSequenceAdapter
                 loadXRGB(Path.Combine(layoutPath, layoutFile));
             }
 
+            if (Directory.Exists(assetsPath))
+            {
+                lblAssetLocation.Text = assetsPath;
+            }
+            else
+            {
+                lblAssetLocation.Text = "Not set...";
+                assetsPath = null;
+            }
         }
 
         private void cmdSelectReference_Click(object sender, EventArgs e)
         {
             if (Directory.Exists(layoutPath))
                 diagFolderBrowser.SelectedPath = layoutPath;
-            
+
+            diagFolderBrowser.Description = "Please select the folder containing your show layout (xlights_rgbeffects.xml).";
+
             DialogResult res = diagFolderBrowser.ShowDialog();
             if (res == DialogResult.Cancel)
             {
                 return;
             }
+
+            layoutPath = diagFolderBrowser.SelectedPath;
 
             cmdOpenShow.Enabled = false;
             cmdExportShowSAF.Enabled = false;
@@ -59,7 +73,6 @@ namespace XlightsSequenceAdapter
                 return;
             }
 
-            layoutPath = diagFolderBrowser.SelectedPath;
             Settings.layoutPath = layoutPath;
             lblRefShow.Text = layoutPath;
 
@@ -602,9 +615,34 @@ namespace XlightsSequenceAdapter
                 }
             }
 
-            // Asset files will be in a folder with the same name as the show
-            // TODO: Maybe improve this so you can set your images, videos, shader folders, etc, to a common location. 
-            string adaptedShowPath = Path.Combine(Path.GetDirectoryName(diagSaveFile.FileName), Path.GetFileNameWithoutExtension(diagSaveFile.FileName));
+            string adaptedShowPath = assetsPath;
+            // create folder and copy asset files if any are found; if directory already exists, will not overwrite.
+            if ((chkCopyAssets.Checked) && (assetsPath != null))
+            {
+                res = MessageBox.Show("A directory folder will be created with the adapted show file to place a copy of assets that were found.  No existing files will be overwritten or modified.  Ok to continue or cancel to skip.", "Create directory and copy assets?", MessageBoxButtons.OKCancel);
+
+                if (res == DialogResult.OK)
+                {
+                    string assetFile;
+                    adaptedShowPath = Path.Combine(assetsPath, Path.GetFileNameWithoutExtension(diagSaveFile.FileName));
+                    if (!Directory.Exists(adaptedShowPath))
+                        Directory.CreateDirectory(adaptedShowPath);
+
+                    foreach (TreeNode file in listShowAssets.Nodes)
+                    {
+                        assetFile = Path.Combine(adaptedShowPath, Path.GetFileName(file.Text));
+                        if ((File.Exists(file.Text)) && (!File.Exists(assetFile)))
+                        {
+                            File.Copy(file.Text, assetFile);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please set your asset folder location on the Show Asset Files tab to map and save assets.");
+                return;
+            }
 
             if (chkRemapAssets.Checked)
             {
@@ -631,28 +669,6 @@ namespace XlightsSequenceAdapter
             }
 
             doc.Save(diagSaveFile.FileName);
-
-            // create folder and copy asset files if any are found; if directory already exists, will not overwrite.
-            if (chkCopyAssets.Checked)
-            {
-                res = MessageBox.Show("A directory folder will be created with the adapted show file to place a copy of assets that were found.  No existing files will be overwritten or modified.  Ok to continue or cancel to skip.", "Create directory and copy assets?", MessageBoxButtons.OKCancel);
-
-                if (res == DialogResult.OK)
-                {
-                    string assetFile;
-                    if (!Directory.Exists(adaptedShowPath))
-                        Directory.CreateDirectory(adaptedShowPath);
-
-                    foreach (TreeNode file in listShowAssets.Nodes)
-                    {
-                        assetFile = Path.Combine(adaptedShowPath, Path.GetFileName(file.Text));
-                        if ((File.Exists(file.Text)) && (!File.Exists(assetFile)))
-                        {
-                            File.Copy(file.Text, assetFile);
-                        }
-                    }
-                }
-            }
 
             MessageBox.Show("Show adapted with your mappings.",
                     "Done!", MessageBoxButtons.OK);
@@ -716,5 +732,28 @@ namespace XlightsSequenceAdapter
 
         }
 
+        private void chkRemapAssets_CheckedChanged(object sender, EventArgs e)
+        {
+            linkAssetLocation.Enabled = chkRemapAssets.Checked;
+        }
+
+        private void linkAssetLocation_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (Directory.Exists(assetsPath))
+                diagFolderBrowser.SelectedPath = assetsPath;
+
+            diagFolderBrowser.Description = "Where would you like to copy assets such as videos, images, and shaders?";
+
+            DialogResult res = diagFolderBrowser.ShowDialog(Owner);
+            if (res == DialogResult.Cancel)
+            {
+                return;
+            }
+
+            assetsPath = diagFolderBrowser.SelectedPath;
+            Settings.assetsPath = assetsPath;
+            lblAssetLocation.Text = assetsPath;
+
+        }
     }
 }

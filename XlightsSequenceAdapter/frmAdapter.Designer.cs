@@ -42,6 +42,8 @@ namespace XlightsSequenceAdapter
             this.diagSaveFile = new System.Windows.Forms.SaveFileDialog();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.tabAssets = new System.Windows.Forms.TabPage();
+            this.lblAssetLocation = new System.Windows.Forms.Label();
+            this.linkAssetLocation = new System.Windows.Forms.LinkLabel();
             this.cmdFindAssetFiles = new System.Windows.Forms.Button();
             this.cmdExportShowSAF = new System.Windows.Forms.Button();
             this.listShowAssets = new System.Windows.Forms.TreeView();
@@ -60,8 +62,6 @@ namespace XlightsSequenceAdapter
             this.colModelFX = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.colMapTo = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.linkAssetLocation = new System.Windows.Forms.LinkLabel();
-            this.lblAssetLocation = new System.Windows.Forms.Label();
             this.tabAssets.SuspendLayout();
             this.tabLayout.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvModels)).BeginInit();
@@ -154,6 +154,28 @@ namespace XlightsSequenceAdapter
             this.tabAssets.TabIndex = 1;
             this.tabAssets.Text = "Show Asset Files";
             this.tabAssets.UseVisualStyleBackColor = true;
+            // 
+            // lblAssetLocation
+            // 
+            this.lblAssetLocation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblAssetLocation.AutoSize = true;
+            this.lblAssetLocation.Location = new System.Drawing.Point(185, 560);
+            this.lblAssetLocation.Name = "lblAssetLocation";
+            this.lblAssetLocation.Size = new System.Drawing.Size(83, 13);
+            this.lblAssetLocation.TabIndex = 20;
+            this.lblAssetLocation.Text = "[Asset Location]";
+            // 
+            // linkAssetLocation
+            // 
+            this.linkAssetLocation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.linkAssetLocation.AutoSize = true;
+            this.linkAssetLocation.Location = new System.Drawing.Point(33, 560);
+            this.linkAssetLocation.Name = "linkAssetLocation";
+            this.linkAssetLocation.Size = new System.Drawing.Size(145, 13);
+            this.linkAssetLocation.TabIndex = 19;
+            this.linkAssetLocation.TabStop = true;
+            this.linkAssetLocation.Text = "Copy assets to new folder in: ";
+            this.linkAssetLocation.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkAssetLocation_LinkClicked);
             // 
             // cmdFindAssetFiles
             // 
@@ -355,26 +377,6 @@ namespace XlightsSequenceAdapter
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(931, 615);
             this.tabControl1.TabIndex = 12;
-            // 
-            // linkAssetLocation
-            // 
-            this.linkAssetLocation.AutoSize = true;
-            this.linkAssetLocation.Location = new System.Drawing.Point(33, 560);
-            this.linkAssetLocation.Name = "linkAssetLocation";
-            this.linkAssetLocation.Size = new System.Drawing.Size(145, 13);
-            this.linkAssetLocation.TabIndex = 19;
-            this.linkAssetLocation.TabStop = true;
-            this.linkAssetLocation.Text = "Copy assets to new folder in: ";
-            this.linkAssetLocation.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkAssetLocation_LinkClicked);
-            // 
-            // lblAssetLocation
-            // 
-            this.lblAssetLocation.AutoSize = true;
-            this.lblAssetLocation.Location = new System.Drawing.Point(185, 560);
-            this.lblAssetLocation.Name = "lblAssetLocation";
-            this.lblAssetLocation.Size = new System.Drawing.Size(83, 13);
-            this.lblAssetLocation.TabIndex = 20;
-            this.lblAssetLocation.Text = "[Asset Location]";
             // 
             // frmAdapter
             // 

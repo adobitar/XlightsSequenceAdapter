@@ -26,6 +26,15 @@ namespace XlightsSequenceAdapter
             { writeSetting("layoutPath", value); }
         }
 
+        public static string assetsPath
+        {
+            get
+            { return getSetting("assetsPath"); }
+
+            set
+            { writeSetting("assetsPath", value); }
+        }
+
         public static string sharedPath
         {
             get

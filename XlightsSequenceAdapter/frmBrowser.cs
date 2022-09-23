@@ -109,14 +109,20 @@ namespace XlightsSequenceAdapter
                 return;
             }
 
+            UseWaitCursor = true;
+
             // Just grab names and paths - very fast, show progress during meta capture which is longer running
             List<string> seqNames = Core.GetXSEQNames(txtPizPath.Text);
+
+            UseWaitCursor = false;
 
             if ((seqNames == null) || (seqNames.Count <= 0))
             {
                 MessageBox.Show(this, "No sequences found for selected root path.", "No results...", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
+
+            UseWaitCursor = true;
 
             progBar.Minimum = 0;
             progBar.Maximum = seqNames.Count();
@@ -217,12 +223,14 @@ namespace XlightsSequenceAdapter
             dgvFileList.Columns["Notes"].DefaultCellStyle.BackColor = Color.White;
 
             cmdPersonalize.Visible = true;
+
+            UseWaitCursor = false;
         }
 
         private void sortBy(Func<XSEQ, IComparable> getProp)
         {
+            // call like sortBy(x => x.Property)
             seqs = seqs.OrderBy(x => getProp(x)).ToList();
-            seqList.ResetBindings();
         }
 
         private void sortBy(PropertyInfo prop)
@@ -231,13 +239,48 @@ namespace XlightsSequenceAdapter
             {
                 seqs.Sort((x, y) => string.Compare((string)prop.GetValue(x), (string)prop.GetValue(y), true));
             }
+        }
 
-            seqList.ResetBindings();
+        private void searchBy(PropertyInfo prop, string query)
+        {
+            if (string.IsNullOrEmpty(query))
+                return;
+
+            UseWaitCursor = true;
+
+            List<XSEQ> filteredseqs = new List<XSEQ>();
+            List<XSEQ> filteredseqs2 = new List<XSEQ>();
+            if (prop == null)
+            {
+                foreach (PropertyInfo p in typeof(XSEQ).GetProperties())
+                {
+                    if (p.PropertyType != typeof(String))
+                        continue;
+
+                    filteredseqs = filteredseqs.Union(seqs.Where(s => (p.GetValue(s) + "").ToString().IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0).ToList()).ToList();
+
+                }
+            }
+            else
+            {
+                if (prop.PropertyType != typeof(String))
+                    return;
+
+                filteredseqs = seqs.Where(s => (prop.GetValue(s) + "").ToString().IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            }
+
+            showingSearchResults = true;
+            picboxClearSearchResults.Visible = true;
+
+            seqList = new BindingList<XSEQ>(filteredseqs);
+            BindingSource bindableSeqs = new BindingSource(seqList, null);
+            dgvFileList.DataSource = bindableSeqs;
+
+            UseWaitCursor = false;
         }
 
         private void ToggleColVisibilityOnItem_Click(object sender, EventArgs e)
         {
-            // MessageBox.Show(sender.ToString());
             dgvFileList.Columns[sender.ToString()].Visible = !dgvFileList.Columns[sender.ToString()].Visible;
         }
 
@@ -259,8 +302,10 @@ namespace XlightsSequenceAdapter
 
         private void dgvFileList_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
+            UseWaitCursor = true;
             XSEQ seq = dgvFileList.Rows[e.RowIndex].DataBoundItem as XSEQ;
             Core.saveXLA(seq);
+            UseWaitCursor = false;
         }
 
         private async void cmdPersonalize_Click(object sender, EventArgs e)
@@ -272,8 +317,7 @@ namespace XlightsSequenceAdapter
                 return;
             }
 
-            var curcursor = Cursor.Current;
-            Cursor.Current = Cursors.WaitCursor;
+            UseWaitCursor = true;
 
             // This function would take the copy the xlights_rgbeffects.xml to xlights_rgbeffects.bak and replace the perspectives element with our own and then save the xml file.
             // It also replaces the xlights_keybindings.xml file.
@@ -299,11 +343,14 @@ namespace XlightsSequenceAdapter
 
             cmdPersonalize.Visible = false;
             progBar.Visible = false;
-            Cursor.Current = curcursor;
+
+            UseWaitCursor = false;
         }
 
         private List<PersonalizationStatus> personalizeSharedSequences(IEnumerable<string> myFiles, IProgress<int> progress)
         {
+            UseWaitCursor = false;
+
             if (progress == null)
                 progress = new Progress<int>();
 
@@ -360,6 +407,8 @@ namespace XlightsSequenceAdapter
                 }
             }
 
+            UseWaitCursor = false;
+            
             return resultsReport;
         }
 
@@ -379,6 +428,8 @@ namespace XlightsSequenceAdapter
 
         private void pizLook(bool andMove)
         {
+            UseWaitCursor = true;
+
             // Look at path in txtPizPath and find files matching folder names and map them up
             // Would be nice to show archives that are not extracted
             // Would also be nice to show folders missing their archive copy
@@ -426,6 +477,8 @@ namespace XlightsSequenceAdapter
             }
 
             dgvFileList.DataSource = new BindingSource(new BindingList<PersonalizationStatus>(resultsReport), null);
+
+            UseWaitCursor = false;
         }
 
         private void dgvFileList_MouseMove(object sender, MouseEventArgs e)
@@ -456,9 +509,11 @@ namespace XlightsSequenceAdapter
         }
 
         private int dgvFileListRowContext = 0;
+        private int dgvFileListColContext = 0;
         private void dgvFileList_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
         {
             dgvFileListRowContext = e.RowIndex;
+            dgvFileListColContext = e.ColumnIndex;
         }
 
         private void toolStripMenuItemOpenInXLights_Click(object sender, EventArgs e)
@@ -482,18 +537,111 @@ namespace XlightsSequenceAdapter
 
         private void dgvFileList_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
+            this.UseWaitCursor = true;
+            Cursor.Position = Cursor.Position;
+
             // sort data grid by this col
             //e.ColumnIndex
             if (e.Button == MouseButtons.Left)
             {
                 // sort by e.ColumnIndex
                 // sortBy(x => x.FileFullname);
-                sortBy(typeof(XSEQ).GetProperty(dgvFileList.Columns[e.ColumnIndex].DataPropertyName));
+                Task.Factory.StartNew(() =>
+                    sortBy(typeof(XSEQ).GetProperty(dgvFileList.Columns[e.ColumnIndex].DataPropertyName)),
+                    TaskCreationOptions.LongRunning);
             }
             else if (e.Button == MouseButtons.Right)
             {
                 // display sort/search context menu
             }
+
+            seqList.ResetBindings();
+            UseWaitCursor = false;
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.Control | Keys.F))
+            {
+                txtSearch.Focus();
+                return true;
+            }
+            else if (keyData == (Keys.Escape))
+            {
+                clearSearchResults();
+                return true;
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void searchfieldToolStripMenuItem_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Enter)
+            {
+                return;
+            }
+
+            // stop the ding
+            e.SuppressKeyPress = true;
+
+            searchBy(
+                typeof(XSEQ).GetProperty(dgvFileList.Columns[dgvFileListColContext].DataPropertyName),
+                searchfieldToolStripMenuItem.Text
+                );
+
+            txtSearch.Text = searchfieldToolStripMenuItem.Text;
+            picboxClearSearchResults.Visible = true;
+            searchfieldToolStripMenuItem.Text = "";
+            contextMenuStripXSeq.Visible = false;
+        }
+
+
+        private void txtSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Enter)
+            {
+                return;
+            }
+
+            // stop the ding
+            e.SuppressKeyPress = true;
+
+            if (string.IsNullOrEmpty(txtSearch.Text))
+                return;
+
+            searchBy(null, txtSearch.Text);
+            picboxClearSearchResults.Visible = true;
+            txtSearch.SelectAll();
+        }
+
+        private void txtSearch_Enter(object sender, EventArgs e)
+        {
+            txtSearch.SelectAll();
+        }
+
+        private void picboxClearSearchResults_Click(object sender, EventArgs e)
+        {
+            clearSearchResults();
+        }
+
+        bool showingSearchResults = false;
+        private void clearSearchResults()
+        {
+            if (!showingSearchResults)
+                return;
+
+            UseWaitCursor = true;
+
+            seqList = new BindingList<XSEQ>(seqs);
+            BindingSource bindableSeqs = new BindingSource(seqList, null);
+            dgvFileList.DataSource = bindableSeqs;
+
+            txtSearch.Text = "";
+            picboxClearSearchResults.Visible = false;
+            showingSearchResults = false;
+
+            UseWaitCursor = false;
         }
     }
 }

@@ -30,6 +30,7 @@ namespace XlightsSequenceAdapter
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmBrowser));
             this.cmdGetList = new System.Windows.Forms.Button();
             this.lnklblWorkingPath = new System.Windows.Forms.LinkLabel();
             this.txtPizPath = new System.Windows.Forms.TextBox();
@@ -39,20 +40,27 @@ namespace XlightsSequenceAdapter
             this.openFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.viewColsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchThisColumnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchfieldToolStripMenuItem = new System.Windows.Forms.ToolStripTextBox();
             this.diagFolderBrowser = new System.Windows.Forms.FolderBrowserDialog();
             this.progBar = new System.Windows.Forms.ProgressBar();
             this.cmdPersonalize = new System.Windows.Forms.Button();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.cmdAnalyze = new System.Windows.Forms.Button();
             this.cmdMoveFiles = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.picboxClearSearchResults = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFileList)).BeginInit();
             this.contextMenuStripXSeq.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picboxClearSearchResults)).BeginInit();
             this.SuspendLayout();
             // 
             // cmdGetList
             // 
             this.cmdGetList.Location = new System.Drawing.Point(16, 44);
-            this.cmdGetList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmdGetList.Margin = new System.Windows.Forms.Padding(4);
             this.cmdGetList.Name = "cmdGetList";
             this.cmdGetList.Size = new System.Drawing.Size(129, 28);
             this.cmdGetList.TabIndex = 19;
@@ -75,7 +83,7 @@ namespace XlightsSequenceAdapter
             // txtPizPath
             // 
             this.txtPizPath.Location = new System.Drawing.Point(119, 12);
-            this.txtPizPath.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPizPath.Margin = new System.Windows.Forms.Padding(4);
             this.txtPizPath.Name = "txtPizPath";
             this.txtPizPath.Size = new System.Drawing.Size(356, 22);
             this.txtPizPath.TabIndex = 17;
@@ -92,11 +100,11 @@ namespace XlightsSequenceAdapter
             this.dgvFileList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvFileList.ContextMenuStrip = this.contextMenuStripXSeq;
             this.dgvFileList.Location = new System.Drawing.Point(16, 80);
-            this.dgvFileList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvFileList.Margin = new System.Windows.Forms.Padding(4);
             this.dgvFileList.Name = "dgvFileList";
             this.dgvFileList.ReadOnly = true;
             this.dgvFileList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            this.dgvFileList.Size = new System.Drawing.Size(1212, 887);
+            this.dgvFileList.Size = new System.Drawing.Size(1173, 570);
             this.dgvFileList.TabIndex = 16;
             this.dgvFileList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFileList_CellDoubleClick);
             this.dgvFileList.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvFileList_CellMouseDown);
@@ -112,51 +120,71 @@ namespace XlightsSequenceAdapter
             this.toolStripMenuItemOpenInXLights,
             this.openFolderToolStripMenuItem,
             this.toolStripSeparator1,
+            this.searchThisColumnToolStripMenuItem,
+            this.toolStripSeparator2,
             this.viewColsToolStripMenuItem});
             this.contextMenuStripXSeq.Name = "contextMenuStripXSeq";
-            this.contextMenuStripXSeq.Size = new System.Drawing.Size(181, 82);
+            this.contextMenuStripXSeq.Size = new System.Drawing.Size(203, 112);
             // 
             // toolStripMenuItemOpenInXLights
             // 
             this.toolStripMenuItemOpenInXLights.Name = "toolStripMenuItemOpenInXLights";
-            this.toolStripMenuItemOpenInXLights.Size = new System.Drawing.Size(180, 24);
+            this.toolStripMenuItemOpenInXLights.Size = new System.Drawing.Size(202, 24);
             this.toolStripMenuItemOpenInXLights.Text = "Open In xLights";
             this.toolStripMenuItemOpenInXLights.Click += new System.EventHandler(this.toolStripMenuItemOpenInXLights_Click);
             // 
             // openFolderToolStripMenuItem
             // 
             this.openFolderToolStripMenuItem.Name = "openFolderToolStripMenuItem";
-            this.openFolderToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.openFolderToolStripMenuItem.Size = new System.Drawing.Size(202, 24);
             this.openFolderToolStripMenuItem.Text = "Open Folder";
             this.openFolderToolStripMenuItem.Click += new System.EventHandler(this.openFolderToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(199, 6);
             // 
             // viewColsToolStripMenuItem
             // 
             this.viewColsToolStripMenuItem.Name = "viewColsToolStripMenuItem";
-            this.viewColsToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.viewColsToolStripMenuItem.Size = new System.Drawing.Size(202, 24);
             this.viewColsToolStripMenuItem.Text = "View Cols";
+            // 
+            // searchThisColumnToolStripMenuItem
+            // 
+            this.searchThisColumnToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.searchfieldToolStripMenuItem});
+            this.searchThisColumnToolStripMenuItem.Name = "searchThisColumnToolStripMenuItem";
+            this.searchThisColumnToolStripMenuItem.Size = new System.Drawing.Size(202, 24);
+            this.searchThisColumnToolStripMenuItem.Text = "Search this column";
+            // 
+            // searchfieldToolStripMenuItem
+            // 
+            this.searchfieldToolStripMenuItem.AcceptsReturn = true;
+            this.searchfieldToolStripMenuItem.AutoSize = false;
+            this.searchfieldToolStripMenuItem.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.searchfieldToolStripMenuItem.MaxLength = 40;
+            this.searchfieldToolStripMenuItem.Name = "searchfieldToolStripMenuItem";
+            this.searchfieldToolStripMenuItem.Size = new System.Drawing.Size(224, 27);
+            this.searchfieldToolStripMenuItem.KeyDown += new System.Windows.Forms.KeyEventHandler(this.searchfieldToolStripMenuItem_KeyDown);
             // 
             // progBar
             // 
             this.progBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.progBar.Location = new System.Drawing.Point(484, 10);
-            this.progBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.progBar.Margin = new System.Windows.Forms.Padding(4);
             this.progBar.Name = "progBar";
-            this.progBar.Size = new System.Drawing.Size(744, 28);
+            this.progBar.Size = new System.Drawing.Size(705, 28);
             this.progBar.TabIndex = 25;
             this.progBar.Visible = false;
             // 
             // cmdPersonalize
             // 
             this.cmdPersonalize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdPersonalize.Location = new System.Drawing.Point(1099, 44);
-            this.cmdPersonalize.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmdPersonalize.Location = new System.Drawing.Point(1060, 44);
+            this.cmdPersonalize.Margin = new System.Windows.Forms.Padding(4);
             this.cmdPersonalize.Name = "cmdPersonalize";
             this.cmdPersonalize.Size = new System.Drawing.Size(129, 28);
             this.cmdPersonalize.TabIndex = 26;
@@ -167,7 +195,7 @@ namespace XlightsSequenceAdapter
             // cmdAnalyze
             // 
             this.cmdAnalyze.Location = new System.Drawing.Point(153, 44);
-            this.cmdAnalyze.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmdAnalyze.Margin = new System.Windows.Forms.Padding(4);
             this.cmdAnalyze.Name = "cmdAnalyze";
             this.cmdAnalyze.Size = new System.Drawing.Size(129, 28);
             this.cmdAnalyze.TabIndex = 27;
@@ -178,8 +206,8 @@ namespace XlightsSequenceAdapter
             // cmdMoveFiles
             // 
             this.cmdMoveFiles.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdMoveFiles.Location = new System.Drawing.Point(1099, 44);
-            this.cmdMoveFiles.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmdMoveFiles.Location = new System.Drawing.Point(1060, 44);
+            this.cmdMoveFiles.Margin = new System.Windows.Forms.Padding(4);
             this.cmdMoveFiles.Name = "cmdMoveFiles";
             this.cmdMoveFiles.Size = new System.Drawing.Size(129, 28);
             this.cmdMoveFiles.TabIndex = 28;
@@ -187,11 +215,50 @@ namespace XlightsSequenceAdapter
             this.cmdMoveFiles.UseVisualStyleBackColor = true;
             this.cmdMoveFiles.Click += new System.EventHandler(this.cmdMoveFiles_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(303, 50);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(112, 16);
+            this.label1.TabIndex = 29;
+            this.label1.Text = "Search Show List:";
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.Location = new System.Drawing.Point(421, 47);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(309, 22);
+            this.txtSearch.TabIndex = 30;
+            this.txtSearch.Enter += new System.EventHandler(this.txtSearch_Enter);
+            this.txtSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSearch_KeyDown);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(199, 6);
+            // 
+            // picboxClearSearchResults
+            // 
+            this.picboxClearSearchResults.Image = ((System.Drawing.Image)(resources.GetObject("picboxClearSearchResults.Image")));
+            this.picboxClearSearchResults.Location = new System.Drawing.Point(736, 50);
+            this.picboxClearSearchResults.Name = "picboxClearSearchResults";
+            this.picboxClearSearchResults.Size = new System.Drawing.Size(16, 16);
+            this.picboxClearSearchResults.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.picboxClearSearchResults.TabIndex = 31;
+            this.picboxClearSearchResults.TabStop = false;
+            this.toolTip.SetToolTip(this.picboxClearSearchResults, "Clear search filter (Esc)");
+            this.picboxClearSearchResults.Visible = false;
+            this.picboxClearSearchResults.Click += new System.EventHandler(this.picboxClearSearchResults_Click);
+            // 
             // frmBrowser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1244, 982);
+            this.ClientSize = new System.Drawing.Size(1205, 665);
+            this.Controls.Add(this.picboxClearSearchResults);
+            this.Controls.Add(this.txtSearch);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.cmdMoveFiles);
             this.Controls.Add(this.cmdAnalyze);
             this.Controls.Add(this.cmdPersonalize);
@@ -200,12 +267,13 @@ namespace XlightsSequenceAdapter
             this.Controls.Add(this.lnklblWorkingPath);
             this.Controls.Add(this.txtPizPath);
             this.Controls.Add(this.dgvFileList);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MinimumSize = new System.Drawing.Size(927, 420);
             this.Name = "frmBrowser";
             this.Text = "Sequence and File Browser";
             ((System.ComponentModel.ISupportInitialize)(this.dgvFileList)).EndInit();
             this.contextMenuStripXSeq.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picboxClearSearchResults)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -228,5 +296,11 @@ namespace XlightsSequenceAdapter
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem viewColsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openFolderToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem searchThisColumnToolStripMenuItem;
+        private System.Windows.Forms.ToolStripTextBox searchfieldToolStripMenuItem;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtSearch;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.PictureBox picboxClearSearchResults;
     }
 }

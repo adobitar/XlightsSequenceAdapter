@@ -1,9 +1,11 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -97,6 +99,8 @@ namespace XlightsSequenceAdapter
             this.Icon = Core.ToIcon((Image)resources.GetObject("tsBrowse.Image"));
         }
 
+        private List<XSEQ> seqs;
+        private BindingList<XSEQ> seqList;
         private async void cmdGetList_Click(object sender, EventArgs e)
         {
             if (!Directory.Exists(txtPizPath.Text))
@@ -123,9 +127,9 @@ namespace XlightsSequenceAdapter
             cmdPersonalize.Visible = true;
 
             var progress = new Progress<int>(p => progBar.Value = p);
-            List<XSEQ> seqs = await Task.Factory.StartNew(() => Core.GetXSEQList(seqNames, progress), TaskCreationOptions.LongRunning);
+            seqs = await Task.Factory.StartNew(() => Core.GetXSEQList(seqNames, progress), TaskCreationOptions.LongRunning);
 
-            BindingList<XSEQ> seqList = new BindingList<XSEQ>(seqs);
+            seqList = new BindingList<XSEQ>(seqs);
             BindingSource bindableSeqs = new BindingSource(seqList, null);
             dgvFileList.DataSource = bindableSeqs;
 
@@ -213,6 +217,22 @@ namespace XlightsSequenceAdapter
             dgvFileList.Columns["Notes"].DefaultCellStyle.BackColor = Color.White;
 
             cmdPersonalize.Visible = true;
+        }
+
+        private void sortBy(Func<XSEQ, IComparable> getProp)
+        {
+            seqs = seqs.OrderBy(x => getProp(x)).ToList();
+            seqList.ResetBindings();
+        }
+
+        private void sortBy(PropertyInfo prop)
+        {
+            if (prop.PropertyType == typeof(String))
+            {
+                seqs.Sort((x, y) => string.Compare((string)prop.GetValue(x), (string)prop.GetValue(y), true));
+            }
+
+            seqList.ResetBindings();
         }
 
         private void ToggleColVisibilityOnItem_Click(object sender, EventArgs e)
@@ -453,6 +473,27 @@ namespace XlightsSequenceAdapter
             XSEQ seq = dgvFileList.Rows[dgvFileListRowContext].DataBoundItem as XSEQ;
 
             System.Diagnostics.Process.Start(seq.Filepath);
+        }
+
+        private void dgvFileList_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+
+        }
+
+        private void dgvFileList_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            // sort data grid by this col
+            //e.ColumnIndex
+            if (e.Button == MouseButtons.Left)
+            {
+                // sort by e.ColumnIndex
+                // sortBy(x => x.FileFullname);
+                sortBy(typeof(XSEQ).GetProperty(dgvFileList.Columns[e.ColumnIndex].DataPropertyName));
+            }
+            else if (e.Button == MouseButtons.Right)
+            {
+                // display sort/search context menu
+            }
         }
     }
 }

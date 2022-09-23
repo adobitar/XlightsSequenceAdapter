@@ -44,6 +44,9 @@ namespace XlightsSequenceAdapter
             this.tsBrowse = new System.Windows.Forms.ToolStripButton();
             this.tsAdapt = new System.Windows.Forms.ToolStripButton();
             this.tsHelp = new System.Windows.Forms.ToolStripButton();
+            this.moreUtilitiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lORToyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lORMapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imageBrowserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -51,13 +54,14 @@ namespace XlightsSequenceAdapter
             // 
             // menuStrip1
             // 
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.windowsToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(584, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(779, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -68,34 +72,34 @@ namespace XlightsSequenceAdapter
             this.sequenceAdapterToolStripMenuItem,
             this.toolStripMenuItem1,
             this.preferencesToolStripMenuItem,
-            this.imageBrowserToolStripMenuItem});
+            this.moreUtilitiesToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(58, 24);
             this.fileToolStripMenuItem.Text = "&Tools";
             // 
             // sharedFilesBrowserToolStripMenuItem
             // 
             this.sharedFilesBrowserToolStripMenuItem.Name = "sharedFilesBrowserToolStripMenuItem";
-            this.sharedFilesBrowserToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.sharedFilesBrowserToolStripMenuItem.Size = new System.Drawing.Size(237, 26);
             this.sharedFilesBrowserToolStripMenuItem.Text = "&Shared Files Browser...";
             this.sharedFilesBrowserToolStripMenuItem.Click += new System.EventHandler(this.sharedFilesBrowserToolStripMenuItem_Click);
             // 
             // sequenceAdapterToolStripMenuItem
             // 
             this.sequenceAdapterToolStripMenuItem.Name = "sequenceAdapterToolStripMenuItem";
-            this.sequenceAdapterToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.sequenceAdapterToolStripMenuItem.Size = new System.Drawing.Size(237, 26);
             this.sequenceAdapterToolStripMenuItem.Text = "Sequence &Adapter...";
             this.sequenceAdapterToolStripMenuItem.Click += new System.EventHandler(this.sequenceAdapterToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(187, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(234, 6);
             // 
             // preferencesToolStripMenuItem
             // 
             this.preferencesToolStripMenuItem.Name = "preferencesToolStripMenuItem";
-            this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(237, 26);
             this.preferencesToolStripMenuItem.Text = "&Preferences...";
             this.preferencesToolStripMenuItem.Click += new System.EventHandler(this.preferencesToolStripMenuItem_Click);
             // 
@@ -104,13 +108,13 @@ namespace XlightsSequenceAdapter
             this.windowsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.nothingCurrentlyOpenToolStripMenuItem});
             this.windowsToolStripMenuItem.Name = "windowsToolStripMenuItem";
-            this.windowsToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
+            this.windowsToolStripMenuItem.Size = new System.Drawing.Size(84, 24);
             this.windowsToolStripMenuItem.Text = "&Windows";
             // 
             // nothingCurrentlyOpenToolStripMenuItem
             // 
             this.nothingCurrentlyOpenToolStripMenuItem.Name = "nothingCurrentlyOpenToolStripMenuItem";
-            this.nothingCurrentlyOpenToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
+            this.nothingCurrentlyOpenToolStripMenuItem.Size = new System.Drawing.Size(254, 26);
             this.nothingCurrentlyOpenToolStripMenuItem.Text = "Nothing currently open...";
             // 
             // helpToolStripMenuItem
@@ -118,25 +122,26 @@ namespace XlightsSequenceAdapter
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.helpToolStripMenuItem1});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(55, 24);
             this.helpToolStripMenuItem.Text = "&Help";
             // 
             // helpToolStripMenuItem1
             // 
             this.helpToolStripMenuItem1.Name = "helpToolStripMenuItem1";
-            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(108, 22);
+            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(133, 26);
             this.helpToolStripMenuItem1.Text = "&Help...";
             this.helpToolStripMenuItem1.Click += new System.EventHandler(this.helpToolStripMenuItem1_Click);
             // 
             // toolStrip1
             // 
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsBrowse,
             this.tsAdapt,
             this.tsHelp});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 24);
+            this.toolStrip1.Location = new System.Drawing.Point(0, 28);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(584, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(779, 27);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -146,7 +151,7 @@ namespace XlightsSequenceAdapter
             this.tsBrowse.Image = ((System.Drawing.Image)(resources.GetObject("tsBrowse.Image")));
             this.tsBrowse.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsBrowse.Name = "tsBrowse";
-            this.tsBrowse.Size = new System.Drawing.Size(23, 22);
+            this.tsBrowse.Size = new System.Drawing.Size(29, 24);
             this.tsBrowse.Text = "&Open";
             this.tsBrowse.ToolTipText = "Shared Sequences Browser";
             this.tsBrowse.Click += new System.EventHandler(this.tsBrowse_Click);
@@ -157,7 +162,7 @@ namespace XlightsSequenceAdapter
             this.tsAdapt.Image = ((System.Drawing.Image)(resources.GetObject("tsAdapt.Image")));
             this.tsAdapt.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsAdapt.Name = "tsAdapt";
-            this.tsAdapt.Size = new System.Drawing.Size(23, 22);
+            this.tsAdapt.Size = new System.Drawing.Size(29, 24);
             this.tsAdapt.Text = "&New";
             this.tsAdapt.ToolTipText = "Sequence Adapter";
             this.tsAdapt.Click += new System.EventHandler(this.tsAdapt_Click);
@@ -168,29 +173,53 @@ namespace XlightsSequenceAdapter
             this.tsHelp.Image = ((System.Drawing.Image)(resources.GetObject("tsHelp.Image")));
             this.tsHelp.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsHelp.Name = "tsHelp";
-            this.tsHelp.Size = new System.Drawing.Size(23, 22);
+            this.tsHelp.Size = new System.Drawing.Size(29, 24);
             this.tsHelp.Text = "He&lp";
             this.tsHelp.Click += new System.EventHandler(this.tsHelp_Click);
+            // 
+            // moreUtilitiesToolStripMenuItem
+            // 
+            this.moreUtilitiesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.imageBrowserToolStripMenuItem,
+            this.lORToyToolStripMenuItem,
+            this.lORMapToolStripMenuItem});
+            this.moreUtilitiesToolStripMenuItem.Name = "moreUtilitiesToolStripMenuItem";
+            this.moreUtilitiesToolStripMenuItem.Size = new System.Drawing.Size(237, 26);
+            this.moreUtilitiesToolStripMenuItem.Text = "More Utilities";
+            // 
+            // lORToyToolStripMenuItem
+            // 
+            this.lORToyToolStripMenuItem.Name = "lORToyToolStripMenuItem";
+            this.lORToyToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.lORToyToolStripMenuItem.Text = "LORToy";
+            this.lORToyToolStripMenuItem.Click += new System.EventHandler(this.lORToyToolStripMenuItem_Click);
+            // 
+            // lORMapToolStripMenuItem
+            // 
+            this.lORMapToolStripMenuItem.Name = "lORMapToolStripMenuItem";
+            this.lORMapToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.lORMapToolStripMenuItem.Text = "LORMap";
+            this.lORMapToolStripMenuItem.Click += new System.EventHandler(this.lORMapToolStripMenuItem_Click);
             // 
             // imageBrowserToolStripMenuItem
             // 
             this.imageBrowserToolStripMenuItem.Name = "imageBrowserToolStripMenuItem";
-            this.imageBrowserToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.imageBrowserToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.imageBrowserToolStripMenuItem.Text = "Image Browser";
-            this.imageBrowserToolStripMenuItem.Visible = false;
             this.imageBrowserToolStripMenuItem.Click += new System.EventHandler(this.imageBrowserToolStripMenuItem_Click);
             // 
             // frmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(584, 54);
+            this.ClientSize = new System.Drawing.Size(779, 66);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.HelpButton = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "frmMain";
             this.Text = "xLights Sequence Adapter";
@@ -220,6 +249,9 @@ namespace XlightsSequenceAdapter
         private System.Windows.Forms.ToolStripButton tsHelp;
         private System.Windows.Forms.ToolStripMenuItem windowsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem nothingCurrentlyOpenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem moreUtilitiesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem imageBrowserToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem lORToyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem lORMapToolStripMenuItem;
     }
 }
